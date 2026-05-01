@@ -1,0 +1,7 @@
+# smart-side robots.txt
+# 公開サイト全体クロール許可・サイトマップ位置を提示
+
+User-agent: *
+Allow: /
+
+Sitemap: https://smart-side.dev/sitemap-index.xml

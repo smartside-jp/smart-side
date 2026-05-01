@@ -1,0 +1,107 @@
+---
+// カテゴリページ（動的ルート / 静的生成）
+// AI / 投資 / IT / 編集後記 のアーカイブ
+// starter-kit は /starter-kit 単独ページ扱いのためここから除外
+
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { CATEGORIES, type CategoryMeta } from '../../lib/categories';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+  // starter-kit は別ページ運用するためカテゴリページからは除外
+  const slugs = (['ai', 'invest', 'it', 'editorial'] as const);
+
+  return slugs.map((slug) => {
+    const posts = allPosts
+      .filter((p) => p.data.category === slug)
+      .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime());
+    return {
+      params: { slug },
+      props: { categorySlug: slug, posts },
+    };
+  });
+}
+
+interface Props {
+  categorySlug: 'ai' | 'invest' | 'it' | 'editorial';
+  posts: CollectionEntry<'posts'>[];
+}
+
+const { categorySlug, posts } = Astro.props;
+const meta: CategoryMeta = CATEGORIES[categorySlug];
+
+const formatDate = (d: Date) => {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}.${m}.${day}`;
+};
+
+const fallbackAccent = 'from-zinc-200 to-zinc-400';
+---
+
+<BaseLayout
+  title={`${meta.fullLabel} | smart-side`}
+  description={meta.description}
+>
+  {/* ─────────── HERO ─────────── */}
+  <section class="max-w-7xl mx-auto px-6 md:px-12 pt-12 md:pt-20 pb-12 md:pb-16">
+    {/* パンくず */}
+    <nav class="meta text-[10px] mb-8" aria-label="パンくず">
+      <a href="/" class="hover:underline underline-offset-4">HOME</a>
+      <span class="mx-2 opacity-50">/</span>
+      <span class="opacity-70">{meta.label}</span>
+    </nav>
+
+    <p class="meta text-xs mb-4">— Category</p>
+    <h1
+      class="text-4xl md:text-6xl leading-tight mb-6"
+      style="font-family: var(--font-jp-serif); font-weight: 700;"
+    >
+      {meta.fullLabel}
+    </h1>
+    <p class="text-base md:text-lg leading-relaxed max-w-2xl" style="color: var(--color-fg-muted); font-family: var(--font-jp-sans);">
+      {meta.description}
+    </p>
+    <p class="meta text-[10px] mt-6">
+      {posts.length > 0 ? `${posts.length} ARTICLES` : '— ARTICLES'}
+    </p>
+  </section>
+
+  {/* ─────────── ARTICLE LIST ─────────── */}
+  <section class="max-w-7xl mx-auto px-6 md:px-12 pb-16 md:pb-24 border-t" style="border-color: rgba(10,10,10,0.08);">
+    {posts.length === 0 ? (
+      <div class="py-20 text-center">
+        <p class="text-base md:text-lg" style="color: var(--color-fg-muted); font-family: var(--font-jp-sans);">
+          このカテゴリの記事はまだありません。
+        </p>
+      </div>
+    ) : (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-14 pt-12 md:pt-16">
+        {posts.map((p) => (
+          <a href={`/posts/${p.id}`} class="group block">
+            <div class={`aspect-[4/3] mb-4 bg-gradient-to-br ${p.data.accent ?? fallbackAccent}`}>
+              <div class="w-full h-full flex items-end p-4">
+                <span class="text-[10px] tracking-widest uppercase text-white/80" style="font-family: var(--font-mono);">
+                  {meta.label}
+                </span>
+              </div>
+            </div>
+            <p class="meta text-[10px] mb-2">
+              {formatDate(p.data.publishedAt)}{p.data.readTime ? ` · ${p.data.readTime}` : ''}
+            </p>
+            <h2 class="text-base md:text-lg leading-snug mb-2 group-hover:underline underline-offset-4" style="font-family: var(--font-jp-serif); font-weight: 700;">
+              {p.data.title}
+            </h2>
+            {p.data.description && (
+              <p class="text-xs md:text-sm leading-relaxed line-clamp-2" style="color: var(--color-fg-muted); font-family: var(--font-jp-sans);">
+                {p.data.description}
+              </p>
+            )}
+          </a>
+        ))}
+      </div>
+    )}
+  </section>
+</BaseLayout>

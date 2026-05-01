@@ -1,0 +1,136 @@
+---
+// smart-side フッター
+// 上：3カラム（SITE / CATEGORY / FOLLOW）
+// 中：タグクラウド
+// 下：コピーライト + ビルド情報
+// 4条件①匿名遵守：地域情報・本名・実所属を出さない（misclog風 footer から TOKYO 等を削除）
+
+const siteLinks = [
+  { href: '/', label: '新着記事' },
+  { href: '/popular', label: 'ランキング' },
+  { href: '/log', label: '運用ログ' },
+  { href: '/sitemap-index.xml', label: 'サイトマップ' },
+];
+
+const categoryLinks = [
+  { href: '/category/ai', label: 'AI / 人工知能' },
+  { href: '/category/invest', label: '投資 / お金' },
+  { href: '/category/it', label: 'IT / 道具' },
+  { href: '/starter-kit', label: 'スターターキット' },
+];
+
+const followLinks = [
+  { href: 'https://x.com/smart_side', label: 'X / TWITTER', external: true },
+  { href: '/rss.xml', label: 'RSS Feed', external: false },
+  { href: '/about', label: 'お問い合わせ', external: false },
+];
+
+const tags = [
+  'AI', 'Claude', '新NISA', 'MCP', 'ChatGPT', 'プロンプト',
+  '投資信託', 'eMAXIS Slim', 'セキュリティ', '1Password', '2FA',
+  'バックアップ', 'スターターキット', '非エンジニア', '個人事業主',
+  '確定申告', 'ふるさと納税', '読書術', 'ポートフォリオ', '時間の使い方',
+];
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer style="background-color: var(--color-bg-dark); color: var(--color-fg-inverse);">
+  <div class="max-w-7xl mx-auto px-6 md:px-12 py-16">
+    <!-- 上段：ロゴ + 説明 + 3カラム -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-12 mb-16">
+      <!-- 左カラム：ロゴ + 説明 -->
+      <div class="md:col-span-4">
+        <div class="text-3xl tracking-tight mb-4" style="font-family: var(--font-display);">
+          smart-side
+        </div>
+        <p class="text-sm leading-relaxed opacity-70" style="font-family: var(--font-jp-sans);">
+          「要らない9割」を捨てる、最低限スターターキット。<br/>
+          AI・投資・IT の編集メディア。
+        </p>
+      </div>
+
+      <!-- SITE -->
+      <div class="md:col-span-2">
+        <h3 class="text-xs mb-4" style="font-family: var(--font-mono); letter-spacing: 0.1em; opacity: 0.5;">
+          SITE
+        </h3>
+        <ul class="space-y-3">
+          {siteLinks.map((item) => (
+            <li>
+              <a href={item.href} class="text-sm hover:underline underline-offset-4">
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- CATEGORY -->
+      <div class="md:col-span-3">
+        <h3 class="text-xs mb-4" style="font-family: var(--font-mono); letter-spacing: 0.1em; opacity: 0.5;">
+          CATEGORY
+        </h3>
+        <ul class="space-y-3">
+          {categoryLinks.map((item) => (
+            <li>
+              <a href={item.href} class="text-sm hover:underline underline-offset-4">
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- FOLLOW -->
+      <div class="md:col-span-3">
+        <h3 class="text-xs mb-4" style="font-family: var(--font-mono); letter-spacing: 0.1em; opacity: 0.5;">
+          FOLLOW
+        </h3>
+        <ul class="space-y-3">
+          {followLinks.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="text-sm hover:underline underline-offset-4"
+                target={item.external ? '_blank' : undefined}
+                rel={item.external ? 'noopener noreferrer' : undefined}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <!-- 中段：タグクラウド -->
+    <div class="border-t pt-10 mb-10" style="border-color: rgba(245, 245, 243, 0.1);">
+      <h3 class="text-xs mb-5" style="font-family: var(--font-mono); letter-spacing: 0.1em; opacity: 0.5;">
+        TAG CLOUD ─ よく読まれているタグ
+      </h3>
+      <div class="flex flex-wrap gap-2">
+        {tags.map((tag) => (
+          <a
+            href={`/tag/${encodeURIComponent(tag)}`}
+            class="text-xs px-3 py-1.5 rounded-full border hover:bg-white/5 transition-colors"
+            style="border-color: rgba(245, 245, 243, 0.2); font-family: var(--font-jp-sans);"
+          >
+            {tag}
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- 下段：コピーライト + ビルド情報 -->
+    <div class="border-t pt-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-xs opacity-50" style="border-color: rgba(245, 245, 243, 0.1); font-family: var(--font-mono); letter-spacing: 0.05em;">
+      <div>© {currentYear} SMART-SIDE. ALL RIGHTS RESERVED.</div>
+      <div>BUILT WITH ASTRO + TAILWIND</div>
+      <div class="flex gap-4">
+        <a href="/privacy" class="hover:underline">PRIVACY</a>
+        <a href="/terms" class="hover:underline">TERMS</a>
+        <a href="/disclaimer" class="hover:underline">DISCLAIMER</a>
+      </div>
+    </div>
+  </div>
+</footer>

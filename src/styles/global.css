@@ -1,0 +1,50 @@
+/* smart-side global styles
+ * Tailwind v4 + design tokens (CSS-first @theme)
+ * 配色：misclog 踏襲 / warm off-white + 黒 + charcoal blue accent
+ */
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  /* 配色トークン */
+  --color-bg: #f5f5f3;
+  --color-bg-section: #fafafa;
+  --color-bg-dark: #0a0a0a;
+  --color-fg: #0a0a0a;
+  --color-fg-muted: #6b6b6b;
+  --color-fg-inverse: #f5f5f3;
+  --color-accent: #1a1a2e;
+
+  /* フォント（実体ファイルは public/fonts に配置・@font-face は次フェーズ） */
+  --font-display: "Instrument Serif", "Noto Serif JP", Georgia, serif;
+  --font-sans: "Geist Sans", "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "Geist Mono", "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+  --font-jp-sans: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+  --font-jp-serif: "Noto Serif JP", "Shippori Mincho B1", "Yu Mincho", serif;
+
+  /* タイポトラッキング（モダンサイト向け） */
+  --tracking-tight: -0.02em;
+  --tracking-wide: 0.05em;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-jp-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4 {
+    letter-spacing: var(--tracking-tight);
+  }
+
+  /* メタ情報・ラベル用（Geist Mono・全大文字想定） */
+  .meta {
+    font-family: var(--font-mono);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    color: var(--color-fg-muted);
+  }
+}

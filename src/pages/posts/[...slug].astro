@@ -1,0 +1,139 @@
+---
+// 記事ページ（動的ルート / 静的生成）
+// すべての公開記事に対し /posts/<slug> を生成
+// 4条件①匿名遵守：著者名・地域情報を出さない
+
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { CATEGORIES } from '../../lib/categories';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post, allPosts: posts },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'posts'>;
+  allPosts: CollectionEntry<'posts'>[];
+}
+
+const { post, allPosts } = Astro.props;
+const { Content } = await render(post);
+
+const meta = CATEGORIES[post.data.category];
+
+// 関連記事（同カテゴリ・自分以外・3件）
+const related = allPosts
+  .filter((p) => p.data.category === post.data.category && p.id !== post.id)
+  .sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime())
+  .slice(0, 3);
+
+const formatDate = (d: Date) => {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}.${m}.${day}`;
+};
+
+const fallbackAccent = 'from-zinc-200 to-zinc-400';
+const categoryHref =
+  post.data.category === 'starter-kit' ? '/starter-kit' : `/category/${post.data.category}`;
+---
+
+<BaseLayout
+  title={`${post.data.title} | smart-side`}
+  description={post.data.description}
+>
+  {/* ─────────── ARTICLE HERO ─────────── */}
+  <article>
+    <header class="max-w-4xl mx-auto px-6 md:px-12 pt-12 md:pt-20 pb-10 md:pb-14">
+      {/* パンくず */}
+      <nav class="meta text-[10px] mb-8" aria-label="パンくず">
+        <a href="/" class="hover:underline underline-offset-4">HOME</a>
+        <span class="mx-2 opacity-50">/</span>
+        <a href={categoryHref} class="hover:underline underline-offset-4">{meta.label}</a>
+      </nav>
+
+      {/* カテゴリ + 日付 */}
+      <p class="meta text-xs mb-6">
+        — {meta.fullLabel} · {formatDate(post.data.publishedAt)}{post.data.readTime ? ` · ${post.data.readTime}` : ''}
+      </p>
+
+      {/* タイトル */}
+      <h1
+        class="text-3xl md:text-5xl leading-tight mb-6"
+        style="font-family: var(--font-jp-serif); font-weight: 700;"
+      >
+        {post.data.title}
+      </h1>
+
+      {/* リード */}
+      {post.data.description && (
+        <p class="text-base md:text-lg leading-relaxed max-w-2xl" style="color: var(--color-fg-muted); font-family: var(--font-jp-sans);">
+          {post.data.description}
+        </p>
+      )}
+    </header>
+
+    {/* アクセント画像（プレースホルダ・グラデーション） */}
+    <div class={`max-w-5xl mx-auto px-6 md:px-12 mb-12 md:mb-16`}>
+      <div class={`aspect-[16/9] bg-gradient-to-br ${post.data.accent ?? fallbackAccent}`}></div>
+    </div>
+
+    {/* ─────────── ARTICLE BODY ─────────── */}
+    <div class="max-w-3xl mx-auto px-6 md:px-12 pb-16 md:pb-24">
+      <div
+        class="prose prose-neutral max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-h2:mt-12 prose-h2:mb-4 prose-h3:mt-8 prose-p:leading-relaxed prose-li:leading-relaxed"
+        style="font-family: var(--font-jp-sans);"
+      >
+        <Content />
+      </div>
+
+      {/* タグ */}
+      {post.data.tags.length > 0 && (
+        <div class="mt-12 pt-8 border-t" style="border-color: rgba(10,10,10,0.12);">
+          <p class="meta text-[10px] mb-4">— TAGS</p>
+          <div class="flex flex-wrap gap-2">
+            {post.data.tags.map((tag) => (
+              <a
+                href={`/tag/${encodeURIComponent(tag)}`}
+                class="text-xs px-3 py-1.5 rounded-full border hover:bg-black/5 transition-colors"
+                style="border-color: rgba(10,10,10,0.15); font-family: var(--font-jp-sans);"
+              >
+                {tag}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </article>
+
+  {/* ─────────── 関連記事 ─────────── */}
+  {related.length > 0 && (
+    <section class="border-t" style="background-color: var(--color-bg-section); border-color: rgba(10,10,10,0.08);">
+      <div class="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-20">
+        <div class="mb-10">
+          <p class="meta text-xs mb-2">— Related</p>
+          <h2 class="text-2xl md:text-3xl" style="font-family: var(--font-jp-serif); font-weight: 700;">
+            同じカテゴリの記事
+          </h2>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-10">
+          {related.map((p) => (
+            <a href={`/posts/${p.id}`} class="group block">
+              <div class={`aspect-[4/3] mb-4 bg-gradient-to-br ${p.data.accent ?? fallbackAccent}`}></div>
+              <p class="meta text-[10px] mb-2">{formatDate(p.data.publishedAt)}</p>
+              <h3 class="text-base leading-snug group-hover:underline underline-offset-4" style="font-family: var(--font-jp-serif); font-weight: 700;">
+                {p.data.title}
+              </h3>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+</BaseLayout>
