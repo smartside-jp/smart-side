@@ -132,3 +132,7 @@ tags:
 
 - [山崎元「個人の資産運用に関する『ヤマザキの分離定理』」（トウシル）](https://media.rakuten-sec.net/articles/-/42261)
 - [水瀬ケンイチ「梅屋敷商店街のランダム・ウォーカー」](https://randomwalker.blog.fc2.com/)
+
+## この記事の他媒体版
+
+- **Note 版**：[「AI・投資・IT、削った先に残ったものだけ書きます ─ smart-side はじめました」](https://note.com/smart_sidev/n/nc5a4c0ca94bb) — Note 読者向けに自己紹介と段落を整えてあります
