@@ -80,13 +80,23 @@ const categoryLabel = (slug: CollectionEntry<'posts'>['data']['category']) => CA
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-14 pt-12 md:pt-16">
         {posts.map((p) => (
           <a href={`/posts/${p.id}`} class="group block">
-            <div class={`aspect-[4/3] mb-4 bg-gradient-to-br ${p.data.accent ?? fallbackAccent}`}>
-              <div class="w-full h-full flex items-end p-4">
-                <span class="text-[10px] tracking-widest uppercase text-white/80" style="font-family: var(--font-mono);">
-                  {categoryLabel(p.data.category)}
-                </span>
+            {p.data.heroImage ? (
+              <img
+                src={p.data.heroImage}
+                alt={p.data.title}
+                loading="lazy"
+                decoding="async"
+                class="aspect-[4/3] mb-4 w-full object-cover"
+              />
+            ) : (
+              <div class={`aspect-[4/3] mb-4 bg-gradient-to-br ${p.data.accent ?? fallbackAccent}`}>
+                <div class="w-full h-full flex items-end p-4">
+                  <span class="text-[10px] tracking-widest uppercase text-white/80" style="font-family: var(--font-mono);">
+                    {categoryLabel(p.data.category)}
+                  </span>
+                </div>
               </div>
-            </div>
+            )}
             <p class="meta text-[10px] mb-2">
               {formatDate(p.data.publishedAt)}{p.data.readTime ? ` · ${p.data.readTime}` : ''}
             </p>

@@ -24,6 +24,7 @@ const posts = defineCollection({
     // 表示用
     readTime: z.string().optional(),       // 例 '7min'
     accent: z.string().optional(),         // tailwind gradient（例 'from-zinc-200 to-zinc-400'）
+    heroImage: z.string().optional(),      // public からの絶対パス（例 '/images/posts/xxx.png'）。指定があれば accent より優先表示
 
     // ピックアップ系
     featured: z.boolean().default(false),

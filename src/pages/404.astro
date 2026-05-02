@@ -69,7 +69,17 @@ const fallbackAccent = 'from-zinc-200 to-zinc-400';
       <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-10">
         {latest.map((p) => (
           <a href={`/posts/${p.id}`} class="group block">
-            <div class={`aspect-[4/3] mb-4 bg-gradient-to-br ${p.data.accent ?? fallbackAccent}`}></div>
+            {p.data.heroImage ? (
+              <img
+                src={p.data.heroImage}
+                alt={p.data.title}
+                loading="lazy"
+                decoding="async"
+                class="aspect-[4/3] mb-4 w-full object-cover"
+              />
+            ) : (
+              <div class={`aspect-[4/3] mb-4 bg-gradient-to-br ${p.data.accent ?? fallbackAccent}`}></div>
+            )}
             <p class="meta text-[10px] mb-2">{formatDate(p.data.publishedAt)}</p>
             <h3 class="text-base leading-snug group-hover:underline underline-offset-4" style="font-family: var(--font-jp-serif); font-weight: 700;">
               {p.data.title}

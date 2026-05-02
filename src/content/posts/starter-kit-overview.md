@@ -6,6 +6,7 @@ publishedAt: 2026-05-02
 updatedAt: 2026-05-02
 readTime: "8min"
 accent: "from-amber-200 to-orange-300"
+heroImage: "/images/posts/starter-kit-hero.png"
 featured: true
 pickedByEditor: true
 popularRank: 1

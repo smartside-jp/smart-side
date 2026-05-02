@@ -113,13 +113,23 @@ const fallbackAccent = 'from-zinc-200 to-zinc-400';
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12">
       {newPosts.map((p) => (
         <a href={`/posts/${p.id}`} class="group block">
-          <div class={`aspect-[4/3] mb-4 overflow-hidden bg-gradient-to-br ${p.data.accent ?? fallbackAccent}`}>
-            <div class="w-full h-full flex items-end p-4">
-              <span class="text-[10px] tracking-widest uppercase text-white/80" style="font-family: var(--font-mono);">
-                {categoryLabel(p.data.category)}
-              </span>
+          {p.data.heroImage ? (
+            <img
+              src={p.data.heroImage}
+              alt={p.data.title}
+              loading="lazy"
+              decoding="async"
+              class="aspect-[4/3] mb-4 w-full object-cover"
+            />
+          ) : (
+            <div class={`aspect-[4/3] mb-4 overflow-hidden bg-gradient-to-br ${p.data.accent ?? fallbackAccent}`}>
+              <div class="w-full h-full flex items-end p-4">
+                <span class="text-[10px] tracking-widest uppercase text-white/80" style="font-family: var(--font-mono);">
+                  {categoryLabel(p.data.category)}
+                </span>
+              </div>
             </div>
-          </div>
+          )}
           <p class="meta text-[10px] mb-2">
             {formatDate(p.data.publishedAt)}{p.data.readTime ? ` · ${p.data.readTime}` : ''}
           </p>
@@ -164,7 +174,17 @@ const fallbackAccent = 'from-zinc-200 to-zinc-400';
         <div class="space-y-8">
           {recommend.map((r) => (
             <a href={`/posts/${r.id}`} class="group grid grid-cols-3 gap-5 items-start">
-              <div class={`col-span-1 aspect-[4/3] bg-gradient-to-br ${r.data.accent ?? fallbackAccent}`}></div>
+              {r.data.heroImage ? (
+                <img
+                  src={r.data.heroImage}
+                  alt={r.data.title}
+                  loading="lazy"
+                  decoding="async"
+                  class="col-span-1 aspect-[4/3] w-full object-cover"
+                />
+              ) : (
+                <div class={`col-span-1 aspect-[4/3] bg-gradient-to-br ${r.data.accent ?? fallbackAccent}`}></div>
+              )}
               <div class="col-span-2">
                 <p class="meta text-[10px] mb-2">{categoryLabel(r.data.category)}</p>
                 <h3 class="text-base md:text-lg leading-snug mb-2 group-hover:underline underline-offset-4" style="font-family: var(--font-jp-serif); font-weight: 700;">
