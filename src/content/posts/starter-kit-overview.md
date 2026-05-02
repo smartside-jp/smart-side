@@ -30,17 +30,15 @@ tags:
 この感覚には、案外しっかりした学術的な裏付けがあります。有名なのが、2000年に行われた **ジャム実験**（Iyengar & Lepper）。スーパーの試食コーナーに 24種類のジャムを並べた日と、6種類だけ並べた日とで、立ち止まった人がそのジャムを買った割合を比べたものです。
 
 <figure class="my-10">
-  <svg viewBox="0 0 360 220" class="w-full max-w-md mx-auto" role="img" aria-labelledby="jamChartTitle jamChartDesc">
-    <title id="jamChartTitle">ジャム実験：選択肢の数と購入率</title>
-    <desc id="jamChartDesc">6種類の棚で立ち止まった人の購入率は約30%、24種類の棚は約3%</desc>
-    <line x1="40" y1="180" x2="320" y2="180" stroke="#0a0a0a" stroke-width="1"/>
-    <rect x="80" y="60" width="60" height="120" fill="#0a0a0a"/>
-    <text x="110" y="50" text-anchor="middle" font-size="20" font-weight="700" fill="#0a0a0a">30%</text>
-    <text x="110" y="200" text-anchor="middle" font-size="13" fill="#6b6b6b">6 種類の棚</text>
-    <rect x="220" y="168" width="60" height="12" fill="#6b6b6b"/>
-    <text x="250" y="160" text-anchor="middle" font-size="20" font-weight="700" fill="#6b6b6b">3%</text>
-    <text x="250" y="200" text-anchor="middle" font-size="13" fill="#6b6b6b">24 種類の棚</text>
-  </svg>
+  <img
+    src="/images/posts/jam-experiment.png"
+    alt="ジャム実験 24種類の棚と6種類の棚の比較。立ち止まった人は24種類の棚が約240人、6種類の棚が約60人。買った人の割合は24種類の棚が約3%(約7人)、6種類の棚が約30%(約18人)で、24種類の棚は6種類の棚の10分の1しか購入されなかった。"
+    width="1536"
+    height="1024"
+    loading="lazy"
+    decoding="async"
+    class="w-full max-w-2xl mx-auto h-auto"
+  />
   <figcaption class="text-center text-xs mt-3" style="color: var(--color-fg-muted);">
     Iyengar &amp; Lepper (2000) — 立ち止まった人が実際に購入した割合
   </figcaption>
