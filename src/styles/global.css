@@ -48,9 +48,13 @@
 }
 
 /* prose（Tailwind Typography 配下）の見出しにも同じ折り返しルールを適用。
-   typography plugin の component layer が base h1〜h4 に勝つので、上書きが必要。 */
+   typography plugin が同じ component layer で specificity (0,1,1) のスタイルを当てるため、
+   :where() を使わずに同じ specificity で後勝ちさせる。 */
 @layer components {
-  .prose :where(h1, h2, h3, h4):not(:where([class~="not-prose"] *)) {
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4 {
     word-break: keep-all;
     word-break: auto-phrase;
   }
