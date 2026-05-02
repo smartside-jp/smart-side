@@ -38,6 +38,10 @@
 
   h1, h2, h3, h4 {
     letter-spacing: var(--tracking-tight);
+    /* 日本語の文節境界で折り返す（PC で1行に収まる時は何もしない＝影響なし）。
+       長文がスマホで端に張り付いて単語の途中で切れるのを防ぐ。 */
+    word-break: keep-all;
+    overflow-wrap: anywhere;
   }
 
   /* メタ情報・ラベル用（Geist Mono・全大文字想定） */
