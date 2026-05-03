@@ -6,6 +6,7 @@ publishedAt: 2026-05-03
 updatedAt: 2026-05-03
 readTime: "10min"
 accent: "from-stone-200 to-stone-400"
+heroImage: "/images/posts/nisa-emaxis-slim-hero.png"
 featured: true
 pickedByEditor: true
 popularRank: 3
