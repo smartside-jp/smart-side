@@ -1,0 +1,106 @@
+---
+// アーカイブページ（全記事一覧・時系列降順）
+// index.astro の「VIEW ALL →」と hero の「運用ログを見る」CTA の遷移先
+
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { CATEGORIES } from '../lib/categories';
+
+type Post = CollectionEntry<'posts'>;
+
+const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+
+// 時系列降順
+const posts = [...allPosts].sort(
+  (a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime()
+);
+
+const formatDate = (d: Date) => {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}.${m}.${day}`;
+};
+
+const categoryLabel = (slug: Post['data']['category']) => CATEGORIES[slug].label;
+
+const fallbackAccent = 'from-zinc-200 to-zinc-400';
+---
+
+<BaseLayout
+  title="Archive | smart-side"
+  description="smart-side の全記事アーカイブ。AI / 投資 / IT / スターターキット を時系列で読める一覧。"
+>
+  {/* ─────────── HERO ─────────── */}
+  <section class="max-w-7xl mx-auto px-6 md:px-12 pt-12 md:pt-20 pb-12 md:pb-16">
+    {/* パンくず */}
+    <nav class="meta text-[10px] mb-8" aria-label="パンくず">
+      <a href="/" class="hover:underline underline-offset-4">HOME</a>
+      <span class="mx-2 opacity-50">/</span>
+      <span class="opacity-70">Archive</span>
+    </nav>
+
+    <p class="meta text-xs mb-4">— Archive</p>
+    <h1
+      class="text-4xl md:text-6xl leading-tight mb-6"
+      style="font-family: var(--font-jp-serif); font-weight: 700;"
+    >
+      全記事アーカイブ
+    </h1>
+    <p class="text-base md:text-lg leading-relaxed max-w-2xl" style="color: var(--color-fg-muted); font-family: var(--font-jp-sans);">
+      AI・投資・IT・スターターキット。これまで書いてきた全記事を、時系列降順で並べています。
+    </p>
+    <p class="meta text-[10px] mt-6">
+      {posts.length > 0 ? `${posts.length} ARTICLES` : '— ARTICLES'}
+    </p>
+  </section>
+
+  {/* ─────────── ARTICLE LIST ─────────── */}
+  <section class="max-w-7xl mx-auto px-6 md:px-12 pb-16 md:pb-24 border-t" style="border-color: rgba(10,10,10,0.08);">
+    {posts.length === 0 ? (
+      <div class="py-20 text-center">
+        <p class="text-base md:text-lg" style="color: var(--color-fg-muted); font-family: var(--font-jp-sans);">
+          まだ記事がありません。
+        </p>
+      </div>
+    ) : (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-14 pt-12 md:pt-16">
+        {posts.map((p) => (
+          <a href={`/posts/${p.id}`} class="group block">
+            {p.data.heroImage ? (
+              <img
+                src={p.data.heroImage}
+                alt={p.data.title}
+                loading="lazy"
+                decoding="async"
+                class="aspect-[4/3] mb-4 w-full object-cover"
+              />
+            ) : (
+              <div class={`aspect-[4/3] mb-4 bg-gradient-to-br ${p.data.accent ?? fallbackAccent}`}>
+                <div class="w-full h-full flex items-end p-4">
+                  <span class="text-[10px] tracking-widest uppercase text-white/80" style="font-family: var(--font-mono);">
+                    {categoryLabel(p.data.category)}
+                  </span>
+                </div>
+              </div>
+            )}
+            <p class="meta text-[10px] mb-2">
+              {formatDate(p.data.publishedAt)}
+              {p.data.readTime ? ` · ${p.data.readTime}` : ''}
+              {' · '}
+              <span class="opacity-70">{categoryLabel(p.data.category)}</span>
+            </p>
+            <h2 class="text-base md:text-lg leading-snug mb-2 group-hover:underline underline-offset-4" style="font-family: var(--font-jp-serif); font-weight: 700;">
+              {p.data.title}
+            </h2>
+            {p.data.description && (
+              <p class="text-xs md:text-sm leading-relaxed line-clamp-2" style="color: var(--color-fg-muted); font-family: var(--font-jp-sans);">
+                {p.data.description}
+              </p>
+            )}
+          </a>
+        ))}
+      </div>
+    )}
+  </section>
+</BaseLayout>
