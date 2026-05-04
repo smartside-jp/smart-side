@@ -64,37 +64,64 @@ const fallbackAccent = 'from-zinc-200 to-zinc-400';
 ---
 
 <BaseLayout>
-  {/* ─────────── HERO ─────────── */}
+  {/* ─────────── HERO（左テキスト + 右画像 2カラム / 雑誌風） ─────────── */}
   <section class="max-w-7xl mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-20 md:pb-28">
-    <p class="meta text-xs mb-8">— Issue 001 — Spring 2026</p>
-    <h1
-      class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight mb-8 max-w-5xl"
-      style="font-family: var(--font-jp-serif); font-weight: 700;"
-    >
-      「要らない9割」を<br class="sm:hidden"/>捨てる<br/>最低限<br class="sm:hidden"/>スターターキット
-    </h1>
-    <p
-      class="text-base md:text-lg leading-relaxed max-w-2xl mb-10"
-      style="color: var(--color-fg-muted); font-family: var(--font-jp-sans);"
-    >
-      AI・投資・IT。世のテンプレを全部試して、削った先に残ったものだけ。<br/>
-      非エンジニアが書く、ミニマム実装メディア。
-    </p>
-    <div class="flex flex-wrap gap-3">
-      <a
-        href="/starter-kit"
-        class="inline-flex items-center px-6 py-3 text-sm hover:opacity-80 transition-opacity"
-        style="background-color: var(--color-fg); color: var(--color-fg-inverse); font-family: var(--font-jp-sans);"
-      >
-        スターターキットを読む →
-      </a>
-      <a
-        href="/log"
-        class="inline-flex items-center px-6 py-3 text-sm border hover:bg-black/5 transition-colors"
-        style="border-color: var(--color-fg); color: var(--color-fg); font-family: var(--font-jp-sans);"
-      >
-        運用ログを見る →
-      </a>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+      {/* 左ペイン：テキスト + 2 CTA */}
+      <div class="lg:col-span-6 order-2 lg:order-1">
+        <p class="meta text-xs mb-8">— Issue 001 — Spring 2026</p>
+        <h1
+          class="text-4xl sm:text-5xl md:text-6xl leading-tight mb-8"
+          style="font-family: var(--font-jp-serif); font-weight: 700;"
+        >
+          「要らない9割」を<br class="sm:hidden"/>捨てる<br/>最低限<br class="sm:hidden"/>スターターキット
+        </h1>
+        <p
+          class="text-base md:text-lg leading-relaxed mb-10"
+          style="color: var(--color-fg-muted); font-family: var(--font-jp-sans);"
+        >
+          AI・投資・IT。世のテンプレを全部試して、削った先に残ったものだけ。<br/>
+          非エンジニアが書く、ミニマム実装メディア。
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a
+            href="/starter-kit"
+            class="inline-flex items-center px-6 py-3 text-sm hover:opacity-80 transition-opacity"
+            style="background-color: var(--color-fg); color: var(--color-fg-inverse); font-family: var(--font-jp-sans);"
+          >
+            スターターキットを読む →
+          </a>
+          <a
+            href="/archive"
+            class="inline-flex items-center px-6 py-3 text-sm border hover:bg-black/5 transition-colors"
+            style="border-color: var(--color-fg); color: var(--color-fg); font-family: var(--font-jp-sans);"
+          >
+            運用ログを見る →
+          </a>
+        </div>
+      </div>
+
+      {/* 右ペイン：ヒーロー画像（仮 placeholder・本番画像到着で差し替え） */}
+      <div class="lg:col-span-6 order-1 lg:order-2">
+        <div
+          class="aspect-[5/4] w-full overflow-hidden"
+          style="background: linear-gradient(135deg, #F0EBE0 0%, #DBD0BC 50%, #B8A88E 100%);"
+        >
+          <div class="w-full h-full flex items-center justify-center">
+            <div class="text-center px-6">
+              <p class="text-xs tracking-[0.2em] uppercase mb-4" style="color: rgba(0,0,0,0.4); font-family: var(--font-mono);">
+                Hero Image
+              </p>
+              <p class="text-sm" style="color: rgba(0,0,0,0.5); font-family: var(--font-jp-serif);">
+                placeholder ─ 本番画像到着で差し替え
+              </p>
+              <p class="text-[10px] mt-6 tracking-wide" style="color: rgba(0,0,0,0.3); font-family: var(--font-mono);">
+                /images/hero-collection.png
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
