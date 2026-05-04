@@ -159,4 +159,120 @@ const categoryHref =
       </div>
     </section>
   )}
+
+  {/* ─────────── 画像ライトボックス（クリックで拡大） ─────────── */}
+  {/* 記事本文（.prose 配下）の画像をクリックすると全画面で表示。
+     既存・新規問わず全記事に自動適用。.md 側の修正は不要。 */}
+  <div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="画像拡大表示" aria-hidden="true">
+    <button class="lightbox-close" type="button" aria-label="閉じる">CLOSE ×</button>
+    <img id="lightbox-image" src="" alt="" />
+    <div class="lightbox-hint">クリック / ESC で閉じる</div>
+  </div>
+
+  <style>
+    /* 記事本文内の画像にズームカーソルを付ける */
+    .prose :global(img) {
+      cursor: zoom-in;
+      transition: opacity 0.15s ease;
+    }
+    .prose :global(img:hover) {
+      opacity: 0.88;
+    }
+
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 10, 10, 0.94);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      cursor: zoom-out;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease, visibility 0.2s ease;
+      padding: 2rem;
+    }
+    .lightbox-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .lightbox-overlay img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      padding: 0.5rem 1rem;
+      font-family: var(--font-mono);
+    }
+    .lightbox-close:hover {
+      color: white;
+      border-color: rgba(255, 255, 255, 0.6);
+    }
+    .lightbox-hint {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.7rem;
+      font-family: var(--font-mono);
+      letter-spacing: 0.15em;
+      pointer-events: none;
+    }
+  </style>
+
+  <script is:inline>
+    (function () {
+      const overlay = document.getElementById('lightbox');
+      const image = document.getElementById('lightbox-image');
+      if (!overlay || !image) return;
+
+      function open(src, alt) {
+        image.src = src;
+        image.alt = alt || '';
+        overlay.classList.add('active');
+        overlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function close() {
+        overlay.classList.remove('active');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        setTimeout(() => { image.src = ''; }, 200);
+      }
+
+      // .prose 内の <img> クリックで開く
+      document.addEventListener('click', (e) => {
+        const target = e.target;
+        if (target && target.tagName === 'IMG' && target.closest('.prose')) {
+          e.preventDefault();
+          open(target.currentSrc || target.src, target.alt);
+        }
+      });
+
+      // オーバーレイ全体クリックで閉じる
+      overlay.addEventListener('click', () => close());
+
+      // ESC キーで閉じる
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && overlay.classList.contains('active')) {
+          close();
+        }
+      });
+    })();
+  </script>
 </BaseLayout>
