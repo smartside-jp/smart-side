@@ -6,9 +6,9 @@ publishedAt: 2026-05-04
 readTime: "12min"
 heroImage: "/images/posts/ideco-vs-nisa-hero.png"
 accent: "from-orange-200 to-stone-300"
-draft: false
+draft: true
 featured: false
-pickedByEditor: true
+pickedByEditor: false
 popularRank: 7
 tags:
   - 投資
