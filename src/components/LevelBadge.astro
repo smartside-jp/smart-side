@@ -1,0 +1,29 @@
+---
+// 記事レベルバッジ（読み手が記事を選びやすくするための小さなラベル）
+// 使用箇所: 記事ページのヘッダー / 記事カード（archive・category・index）
+
+import { LEVELS } from '../lib/levels';
+import type { LevelSlug } from '../content.config';
+
+interface Props {
+  level: LevelSlug;
+  size?: 'sm' | 'md';        // sm: カード用（小さめ）/ md: 記事ヘッダー用
+  withTooltip?: boolean;     // hover で説明を出すか
+}
+
+const { level, size = 'sm', withTooltip = false } = Astro.props;
+const meta = LEVELS[level];
+
+const sizeClasses = {
+  sm: 'text-[9px] px-1.5 py-0.5 tracking-widest',
+  md: 'text-[10px] px-2 py-1 tracking-widest',
+};
+---
+
+<span
+  class={`inline-flex items-center uppercase border ${meta.badgeClass} ${sizeClasses[size]}`}
+  style="font-family: var(--font-mono);"
+  title={withTooltip ? meta.description : undefined}
+>
+  {meta.label}
+</span>

@@ -4,6 +4,7 @@
 
 import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import LevelBadge from '../components/LevelBadge.astro';
 import { CATEGORIES } from '../lib/categories';
 
 type Post = CollectionEntry<'posts'>;
@@ -84,12 +85,15 @@ const fallbackAccent = 'from-zinc-200 to-zinc-400';
                 </div>
               </div>
             )}
-            <p class="meta text-[10px] mb-2">
-              {formatDate(p.data.publishedAt)}
-              {p.data.readTime ? ` · ${p.data.readTime}` : ''}
-              {' · '}
-              <span class="opacity-70">{categoryLabel(p.data.category)}</span>
-            </p>
+            <div class="flex items-center gap-2 mb-2 flex-wrap">
+              <LevelBadge level={p.data.level} size="sm" />
+              <p class="meta text-[10px]">
+                {formatDate(p.data.publishedAt)}
+                {p.data.readTime ? ` · ${p.data.readTime}` : ''}
+                {' · '}
+                <span class="opacity-70">{categoryLabel(p.data.category)}</span>
+              </p>
+            </div>
             <h2 class="text-base md:text-lg leading-snug mb-2 group-hover:underline underline-offset-4" style="font-family: var(--font-jp-serif); font-weight: 700;">
               {p.data.title}
             </h2>

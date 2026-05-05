@@ -2,6 +2,7 @@
 title: "Claude Code 最低限セットアップ ─ 削った先に残った3つの装置"
 description: "VS Code 拡張・大量 MCP・細かい hook を全部試して、削った先に残った3つの装置。CLAUDE.md と memory と、1つだけの MCP。"
 category: "ai"
+level: "standard"
 publishedAt: 2026-05-04
 updatedAt: 2026-05-04
 readTime: "10min"

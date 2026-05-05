@@ -5,6 +5,7 @@
 
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import LevelBadge from '../../components/LevelBadge.astro';
 import { CATEGORIES } from '../../lib/categories';
 
 export async function getStaticPaths() {
@@ -58,10 +59,13 @@ const categoryHref =
         <a href={categoryHref} class="hover:underline underline-offset-4">{meta.label}</a>
       </nav>
 
-      {/* カテゴリ + 日付 */}
-      <p class="meta text-xs mb-6">
-        — {meta.fullLabel} · {formatDate(post.data.publishedAt)}{post.data.readTime ? ` · ${post.data.readTime}` : ''}
-      </p>
+      {/* レベルバッジ + カテゴリ + 日付 */}
+      <div class="flex items-center gap-3 mb-6 flex-wrap">
+        <LevelBadge level={post.data.level} size="md" withTooltip />
+        <p class="meta text-xs">
+          — {meta.fullLabel} · {formatDate(post.data.publishedAt)}{post.data.readTime ? ` · ${post.data.readTime}` : ''}
+        </p>
+      </div>
 
       {/* タイトル */}
       <h1
@@ -149,7 +153,10 @@ const categoryHref =
               ) : (
                 <div class={`aspect-[4/3] mb-4 bg-gradient-to-br ${p.data.accent ?? fallbackAccent}`}></div>
               )}
-              <p class="meta text-[10px] mb-2">{formatDate(p.data.publishedAt)}</p>
+              <div class="flex items-center gap-2 mb-2 flex-wrap">
+                <LevelBadge level={p.data.level} size="sm" />
+                <p class="meta text-[10px]">{formatDate(p.data.publishedAt)}</p>
+              </div>
               <h3 class="text-base leading-snug group-hover:underline underline-offset-4" style="font-family: var(--font-jp-serif); font-weight: 700;">
                 {p.data.title}
               </h3>

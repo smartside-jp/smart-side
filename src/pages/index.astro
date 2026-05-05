@@ -5,6 +5,7 @@
 
 import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import LevelBadge from '../components/LevelBadge.astro';
 import { CATEGORIES } from '../lib/categories';
 
 // ──────────── データ取得・派生 ────────────
@@ -145,9 +146,12 @@ const fallbackAccent = 'from-zinc-200 to-zinc-400';
               </div>
             </div>
           )}
-          <p class="meta text-[10px] mb-2">
-            {formatDate(p.data.publishedAt)}{p.data.readTime ? ` · ${p.data.readTime}` : ''}
-          </p>
+          <div class="flex items-center gap-2 mb-2 flex-wrap">
+            <LevelBadge level={p.data.level} size="sm" />
+            <p class="meta text-[10px]">
+              {formatDate(p.data.publishedAt)}{p.data.readTime ? ` · ${p.data.readTime}` : ''}
+            </p>
+          </div>
           <h3 class="text-base md:text-lg leading-snug group-hover:underline underline-offset-4" style="font-family: var(--font-jp-serif); font-weight: 700;">
             {p.data.title}
           </h3>
@@ -231,7 +235,10 @@ const fallbackAccent = 'from-zinc-200 to-zinc-400';
       {categoryAI.map((p) => (
         <li>
           <a href={`/posts/${p.id}`} class="group block py-3 border-b" style="border-color: rgba(10,10,10,0.08);">
-            <p class="meta text-[10px] mb-2">{formatDate(p.data.publishedAt)}</p>
+            <div class="flex items-center gap-2 mb-2 flex-wrap">
+              <LevelBadge level={p.data.level} size="sm" />
+              <p class="meta text-[10px]">{formatDate(p.data.publishedAt)}</p>
+            </div>
             <h3 class="text-base leading-snug group-hover:underline underline-offset-4" style="font-family: var(--font-jp-serif); font-weight: 700;">
               {p.data.title}
             </h3>
@@ -257,7 +264,10 @@ const fallbackAccent = 'from-zinc-200 to-zinc-400';
         {categoryInvest.map((p) => (
           <li>
             <a href={`/posts/${p.id}`} class="group block py-3 border-b" style="border-color: rgba(10,10,10,0.08);">
-              <p class="meta text-[10px] mb-2">{formatDate(p.data.publishedAt)}</p>
+              <div class="flex items-center gap-2 mb-2 flex-wrap">
+              <LevelBadge level={p.data.level} size="sm" />
+              <p class="meta text-[10px]">{formatDate(p.data.publishedAt)}</p>
+            </div>
               <h3 class="text-base leading-snug group-hover:underline underline-offset-4" style="font-family: var(--font-jp-serif); font-weight: 700;">
                 {p.data.title}
               </h3>
@@ -283,7 +293,10 @@ const fallbackAccent = 'from-zinc-200 to-zinc-400';
       {categoryIT.map((p) => (
         <li>
           <a href={`/posts/${p.id}`} class="group block py-3 border-b" style="border-color: rgba(10,10,10,0.08);">
-            <p class="meta text-[10px] mb-2">{formatDate(p.data.publishedAt)}</p>
+            <div class="flex items-center gap-2 mb-2 flex-wrap">
+              <LevelBadge level={p.data.level} size="sm" />
+              <p class="meta text-[10px]">{formatDate(p.data.publishedAt)}</p>
+            </div>
             <h3 class="text-base leading-snug group-hover:underline underline-offset-4" style="font-family: var(--font-jp-serif); font-weight: 700;">
               {p.data.title}
             </h3>

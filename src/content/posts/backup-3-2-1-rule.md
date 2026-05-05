@@ -2,6 +2,7 @@
 title: "3-2-1 バックアップルール ─ 数百人の事故から逆算した最後の1手"
 description: "看板記事 IT 編 3点セットの最後の1手。HDD 1.57% / ランサム +149% / IPA 6か条最新版を踏まえた、非エンジニアのベースライン構成。"
 category: "it"
+level: "standard"
 publishedAt: 2026-05-04
 updatedAt: 2026-05-04
 readTime: "12min"

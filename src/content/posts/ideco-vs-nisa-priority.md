@@ -2,6 +2,7 @@
 title: "iDeCo を選ばなかった理由 ─ 3つの揺らぎを見て、NISA を先に埋めることにした"
 description: "iDeCo を選ばなかった理由は流動性です。それを裏付けてみたら、流動性・国の制度改変・年金問題の3つが重なっていました。食わず嫌いを認めながら、それでも自分はこちらを選んだ話。"
 category: "invest"
+level: "standard"
 publishedAt: 2026-05-04
 readTime: "15min"
 heroImage: "/images/posts/ideco-vs-nisa-hero.png"

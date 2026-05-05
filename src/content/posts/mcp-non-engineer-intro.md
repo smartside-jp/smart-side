@@ -2,6 +2,7 @@
 title: "非エンジニアの MCP 最低限 ─ 1つで動く、3つで止まる"
 description: "Claude Code 最低限セットアップで「装置③」と書いた MCP の深掘り。2026年公式が JSON 編集を卒業した今、最初の1つに Filesystem を推す根拠。"
 category: "ai"
+level: "standard"
 publishedAt: 2026-05-04
 updatedAt: 2026-05-04
 readTime: "11min"

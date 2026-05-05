@@ -2,6 +2,7 @@
 title: "1Password と 2FA で守るベースライン ─ 数百人の事故から逆算した最初の2手"
 description: "看板記事 IT 編の3点セットの最初の2つを実装解説。NIST 最新版・1Password 公式・日本のフィッシング被害87億円の数字を踏まえた、非エンジニアのベースライン設計。"
 category: "it"
+level: "standard"
 publishedAt: 2026-05-04
 updatedAt: 2026-05-04
 readTime: "12min"

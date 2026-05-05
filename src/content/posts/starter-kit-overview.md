@@ -2,6 +2,7 @@
 title: "要らない9割を捨てる 最低限スターターキット"
 description: "AI・投資・IT を選び抜く3軸。削った先に残ったものだけを並べた、最低限スターターキット。"
 category: "starter-kit"
+level: "standard"
 publishedAt: 2026-05-02
 updatedAt: 2026-05-02
 readTime: "8min"

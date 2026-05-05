@@ -2,6 +2,7 @@
 title: "新NISA は eMAXIS Slim 1本でいい その判断に必要な3つの計算"
 description: "「時間 × インデックス × 積立」の実装。月3万・30年で何が起きるかを計算で確かめ、なぜオルカン1本に削れたかを書く。"
 category: "invest"
+level: "standard"
 publishedAt: 2026-05-03
 updatedAt: 2026-05-03
 readTime: "10min"
