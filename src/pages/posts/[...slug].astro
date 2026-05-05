@@ -83,22 +83,25 @@ const categoryHref =
       )}
     </header>
 
-    {/* ヒーロー：heroImage 指定があれば画像、なければグラデーションフォールバック */}
-    <div class={`max-w-5xl mx-auto px-6 md:px-12 mb-12 md:mb-16`}>
-      {post.data.heroImage ? (
-        <img
-          src={post.data.heroImage}
-          alt={post.data.title}
-          width="1672"
-          height="941"
-          loading="eager"
-          decoding="async"
-          class="w-full aspect-[16/9] object-cover"
-        />
-      ) : (
-        <div class={`aspect-[16/9] bg-gradient-to-br ${post.data.accent ?? fallbackAccent}`}></div>
-      )}
-    </div>
+    {/* ヒーロー：glossary（用語集）は枠ごと非表示・短い記事なのでタイトル直下から本文に入る。
+        それ以外は heroImage があれば画像、なければグラデーションフォールバック。 */}
+    {post.data.level !== 'glossary' && (
+      <div class={`max-w-5xl mx-auto px-6 md:px-12 mb-12 md:mb-16`}>
+        {post.data.heroImage ? (
+          <img
+            src={post.data.heroImage}
+            alt={post.data.title}
+            width="1672"
+            height="941"
+            loading="eager"
+            decoding="async"
+            class="w-full aspect-[16/9] object-cover"
+          />
+        ) : (
+          <div class={`aspect-[16/9] bg-gradient-to-br ${post.data.accent ?? fallbackAccent}`}></div>
+        )}
+      </div>
+    )}
 
     {/* ─────────── ARTICLE BODY ─────────── */}
     <div class="max-w-3xl mx-auto px-6 md:px-12 pb-16 md:pb-24">
