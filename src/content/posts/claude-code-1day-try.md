@@ -5,6 +5,7 @@ category: "ai"
 level: "beginner"
 publishedAt: 2026-05-05
 readTime: "8min"
+heroImage: "/images/posts/claude-code-1day-try-hero.png"
 accent: "from-indigo-200 to-slate-300"
 draft: false
 featured: false
