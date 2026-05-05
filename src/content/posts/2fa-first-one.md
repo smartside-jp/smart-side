@@ -5,6 +5,7 @@ category: "it"
 level: "beginner"
 publishedAt: 2026-05-05
 readTime: "8min"
+heroImage: "/images/posts/2fa-first-one-hero.png"
 accent: "from-rose-200 to-slate-300"
 draft: false
 featured: false
