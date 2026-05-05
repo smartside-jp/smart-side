@@ -42,12 +42,30 @@ const formatDate = (d: Date) => {
 const fallbackAccent = 'from-zinc-200 to-zinc-400';
 const categoryHref =
   post.data.category === 'starter-kit' ? '/starter-kit' : `/category/${post.data.category}`;
+
+// SEO：構造化データ用の articleMeta（Article JSON-LD + og:article:* メタ）
+// description が必須化されたので fallback 不要
+const articleMeta = {
+  publishedTime: post.data.publishedAt,
+  modifiedTime: post.data.updatedAt,
+  section: meta.fullLabel,
+  tags: post.data.tags,
+};
+
+// SEO：BreadcrumbList JSON-LD（HOME > カテゴリ > 記事タイトル）
+const breadcrumb = [
+  { name: 'HOME', url: '/' },
+  { name: meta.label, url: categoryHref },
+  { name: post.data.title, url: `/posts/${post.id}/` },
+];
 ---
 
 <BaseLayout
   title={`${post.data.title} | smart-side`}
   description={post.data.description}
-  ogImage={post.data.heroImage}
+  ogImage={post.data.heroImage ?? '/og-default.png'}
+  article={articleMeta}
+  breadcrumb={breadcrumb}
 >
   {/* ─────────── ARTICLE HERO ─────────── */}
   <article>
@@ -149,6 +167,8 @@ const categoryHref =
                 <img
                   src={p.data.heroImage}
                   alt={p.data.title}
+                  width="1672"
+                  height="941"
                   loading="lazy"
                   decoding="async"
                   class="aspect-[4/3] mb-4 w-full object-cover"

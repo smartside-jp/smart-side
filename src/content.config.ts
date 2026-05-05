@@ -21,7 +21,7 @@ const posts = defineCollection({
   schema: z.object({
     // 基本メタ
     title: z.string(),
-    description: z.string().optional(),
+    description: z.string(),  // SEO・OGP・JSON-LD で必須利用
     category: z.enum(CATEGORY_SLUGS),
 
     // 日付
