@@ -5,6 +5,7 @@ category: "invest"
 level: "beginner"
 publishedAt: 2026-05-05
 readTime: "8min"
+heroImage: "/images/posts/nisa-3000-yen-hero.png"
 accent: "from-orange-200 to-stone-300"
 draft: false
 featured: false
