@@ -85,9 +85,9 @@ const breadcrumb = [
         </p>
       </div>
 
-      {/* タイトル */}
+      {/* タイトル：スマホで text-2xl まで縮小（はみ出し防止）+ md以上で text-5xl */}
       <h1
-        class="text-3xl md:text-5xl leading-tight mb-6"
+        class="text-2xl sm:text-3xl md:text-5xl leading-tight mb-6"
         style="font-family: var(--font-jp-serif); font-weight: 700;"
       >
         {post.data.title}

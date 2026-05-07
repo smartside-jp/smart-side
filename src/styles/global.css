@@ -41,9 +41,13 @@
     /* 日本語の文節境界で折り返す（PC で1行に収まる時は何もしない＝影響なし）。
        1) auto-phrase: Safari 17+/Chrome 119+ で日本語の自然な区切りで折る
        2) keep-all: フォールバック（古いブラウザ用）
-       3) overflow-wrap は normal のまま — anywhere にすると単語途中で折れるので使わない */
+       3) overflow-wrap: anywhere: 最終fallback（iOS Safari で auto-phrase が動かない時用・
+          実機でのはみ出しを絶対に防ぐ。単語途中で折れる可能性はあるが、はみ出しよりマシ・
+          word-break と <wbr> が優先されるため大半のケースでは綺麗に折れる）。
+       2026-05-07 追加：スマホ実機ではみ出しが繰り返し発生したため恒久対策。 */
     word-break: keep-all;
     word-break: auto-phrase;
+    overflow-wrap: anywhere;
   }
 }
 
@@ -57,6 +61,7 @@
   .prose h4 {
     word-break: keep-all;
     word-break: auto-phrase;
+    overflow-wrap: anywhere;  /* 2026-05-07：スマホ実機 fallback */
   }
 
   /* メタ情報・ラベル用（Geist Mono・全大文字想定） */
