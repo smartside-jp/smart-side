@@ -50,6 +50,21 @@ tags:
 
 入門段階で押さえておくのは、この4つで充分。それぞれ「得意分野」が違うので、後で組み合わせて使います。
 
+<figure class="my-10">
+  <img
+    src="/images/posts/what-is-wealth-building-options.png"
+    alt="資産形成の4つの選択肢のインフォグラフィック。貯金（豚の貯金箱・いつでも引き出せる、利回りはほぼゼロ）、保険（盾と傘・保障が主目的、運用効率は低め）、投資（苗と右肩上がりの矢印・時間と複利で増える、リスクあり）、不動産（家・大きい資金が必要、流動性低い）。"
+    width="1536"
+    height="864"
+    loading="lazy"
+    decoding="async"
+    class="w-full max-w-2xl mx-auto h-auto"
+  />
+  <figcaption class="text-center text-xs mt-3" style="color: var(--color-fg-muted);">
+    入門段階で知っておきたい4つの選択肢 ── 得意分野が違うので、組み合わせて使う
+  </figcaption>
+</figure>
+
 ### ① 貯金
 
 - いつでも引き出せる・元本保証
