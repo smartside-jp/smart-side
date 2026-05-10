@@ -182,7 +182,20 @@ Thank you.
 
 ここでは **個人利用** に絞って、リスクの強弱で5段階に整理します。
 
-> 📊 ここにインフォグラフィックをアップロード（リスク早見ライン）
+<figure class="my-10">
+  <img
+    src="/images/posts/chatgpt-personal-info-recovery-risk-line.png"
+    alt="生成AI に入れたもの・リスク早見ライン（個人編）。5段階の手書きリスト：①名前のみ（緑・低リスク・手順①②で十分）/ ②住所・電話・メール（黄・中・手順①②③+迷惑連絡注意）/ ③家族・恋人の話（黄・中・手順①②③+家族に共有）/ ④顔写真・身分証（橙・高・手順①②③+外部監視）/ ⑤パスワード・口座（赤・最高・即パスワード変更+2FA・生成AIより先）。各段に手書きアイコン付き。"
+    width="1536"
+    height="864"
+    loading="lazy"
+    decoding="async"
+    class="w-full max-w-2xl mx-auto h-auto"
+  />
+  <figcaption class="text-center text-xs mt-3" style="color: var(--color-fg-muted);">
+    入れちゃった内容別の5段階リスク早見ライン（個人利用シーン限定）
+  </figcaption>
+</figure>
 
 | 入れた内容 | リスク | 推奨アクション |
 |---|---|---|
