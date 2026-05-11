@@ -29,7 +29,7 @@ tags:
 
 この記事は、その **最初の2手（1Password と 2FA）** を実装レベルで残しておきます。3つ目の 3-2-1 バックアップは別記事[3-2-1 バックアップルール](/posts/backup-3-2-1-rule)で扱います。
 
-ここからは、第2記事「[新NISA は eMAXIS Slim 1本でいい](/posts/nisa-emaxis-slim-only)」が「3つの計算」、第3記事「[Claude Code 最低限セットアップ](/posts/claude-code-minimum-setup)」が「3つの装置」だったのと並列で、IT 編は **「2つの装備」+ 1つの補助** で書きます。3にこだわらず、実態で削った結果です。
+ここからは、[新NISA は eMAXIS Slim 1本でいい](/posts/nisa-emaxis-slim-only) が「3つの計算」、[Claude Code 最低限セットアップ](/posts/claude-code-minimum-setup) が「3つの装置」だったのと並列で、IT 編は **「2つの装備」+ 1つの補助** で書きます。3にこだわらず、実態で削った結果です。
 
 ---
 
@@ -188,7 +188,7 @@ Emergency Kit やバックアップコードを Google Drive / Dropbox / iCloud 
 
 ## 装備は変わらない、組み込むサービスは人によって違う
 
-第2記事と第3記事で、こう書きました。
+[新NISA は eMAXIS Slim 1本でいい](/posts/nisa-emaxis-slim-only/) と [Claude Code 最低限セットアップ](/posts/claude-code-minimum-setup/) で、こう書きました。
 
 > 公式は変わらない。でも代入する数字は、人によって違います。
 > 装置は変わらない。でも組み込む業務は人によって違います。
