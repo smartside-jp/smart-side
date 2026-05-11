@@ -40,7 +40,20 @@ tags:
 
 先に1枚地図を渡します。下の図は5つの経路を一覧にしたものです（同じ内容を、図の後に1つずつ詳しく書きます）。
 
-> 📊 ここにインフォグラフィックをアップロード（5経路の全体マップ）
+<figure class="my-6">
+  <img
+    src="/images/posts/how-genai-leaks-personal-info-map.png"
+    alt="図：生成AI 5つの漏れ方マップ。経路1：学習データ取り込み（例：Carlini 2021・GPT-2 から訓練データ抽出）/ 経路2：母体企業のバグ・内部漏洩（例：2023-03 ChatGPT Redis バグ・Plus会員1.2%のクレカ末尾4桁が漏洩）/ 経路3：共有機能の誤公開（例：2025-07 ChatGPT Share・約4,500件がGoogle検索可能）/ 経路4：プロンプトインジェクション（例：arXiv 2406.00199・memory機能+不可視Markdownで会話履歴抽出）/ 経路5：法的開示請求（例：OpenAI Privacy Policy 明記・法執行機関に提供する場合あり）。"
+    width="1536"
+    height="864"
+    loading="lazy"
+    decoding="async"
+    class="w-full max-w-2xl mx-auto h-auto"
+  />
+  <figcaption class="text-center text-xs mt-3" style="color: var(--color-fg-muted);">
+    図：5つの漏洩経路を1枚にまとめたもの。詳しくは本文で1つずつ解説します。
+  </figcaption>
+</figure>
 
 文字で並べると：
 
