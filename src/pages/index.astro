@@ -25,11 +25,25 @@ const popular = allPosts
   .sort((a, b) => (a.data.popularRank! - b.data.popularRank!))
   .slice(0, 5);
 
-// Recommend（編集部おすすめ・最大3件・featured 優先）
-const recommend = allPosts
-  .filter((p) => p.data.pickedByEditor)
-  .sort((a, b) => Number(b.data.featured) - Number(a.data.featured) || byPublishedDesc(a, b))
-  .slice(0, 3);
+// Recommend（編集部おすすめ・各カテゴリ AI/投資/IT から1本ずつ・最大3件）
+// pickedByEditor を満たす中から、featured 優先 → popularRank 昇順 → 新着順タイブレーク
+const recommendByCategory = (slug: 'ai' | 'invest' | 'it'): Post | undefined =>
+  allPosts
+    .filter((p) => p.data.category === slug && p.data.pickedByEditor)
+    .sort((a, b) => {
+      const fDiff = Number(b.data.featured) - Number(a.data.featured);
+      if (fDiff !== 0) return fDiff;
+      const aRank = a.data.popularRank ?? 999;
+      const bRank = b.data.popularRank ?? 999;
+      if (aRank !== bRank) return aRank - bRank;
+      return byPublishedDesc(a, b);
+    })[0];
+
+const recommend = [
+  recommendByCategory('ai'),
+  recommendByCategory('invest'),
+  recommendByCategory('it'),
+].filter((p): p is Post => p !== undefined);
 
 // カテゴリ別 4件ずつ
 const filterByCategory = (slug: 'ai' | 'invest' | 'it') =>
