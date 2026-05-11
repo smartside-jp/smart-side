@@ -331,4 +331,4 @@ MCP は **「終わり」がない領域** です。
 - [要らない9割を捨てる 最低限スターターキット](/posts/starter-kit-overview) — このサイトの土台。判断軸の原理と AI 編の経緯
 - [Claude Code 最低限セットアップ ─ 削った先に残った3つの装置](/posts/claude-code-minimum-setup) — 装置③ MCP を概論で扱った兄弟記事
 - [新NISA は eMAXIS Slim 1本でいい その判断に必要な3つの計算](/posts/nisa-emaxis-slim-only) — 「3つの計算」フレームの兄弟記事
-- [1Password と 2FA で守るベースライン ─ 数百人の事故から逆算した最初の2手](/posts/1password-2fa-baseline) — IT 編の兄弟記事
+- [1Password と 2段階認証で守るベースライン ─ 数百人の事故から逆算した最初の2手](/posts/1password-2fa-baseline) — IT 編の兄弟記事
