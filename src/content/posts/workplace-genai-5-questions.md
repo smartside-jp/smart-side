@@ -92,7 +92,7 @@ tags:
 | 法人プラン | ChatGPT Business・Enterprise / Claude Team・Enterprise / M365 Copilot / Workspace Gemini | デフォルト OFF・契約で保護 | OK |
 
 <figure>
-  <img src="/images/posts/workplace-genai-5-questions-plan-comparison.png" alt="個人プランと法人プランの境界線を示した比較図。個人無料・個人有料・法人プランの3階層で、データの学習利用可否・業務利用の可否がそれぞれ異なる。" width="1200" height="800" loading="lazy" />
+  <img src="/images/posts/workplace-genai-5-questions-plan-comparison.png" alt="個人プランと法人プランの境界線を示した比較図。個人無料・個人有料・法人プランの3階層で、データの学習利用可否・業務利用の可否がそれぞれ異なる。" width="1448" height="1086" loading="lazy" />
   <figcaption>図：個人プランと法人プランの境界線。同じ ChatGPT でも、データが学習に使われるかどうかは契約形態で決まる。下の本文で1つずつ確認できます。</figcaption>
 </figure>
 
