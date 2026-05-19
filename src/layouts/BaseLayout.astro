@@ -194,6 +194,15 @@ const breadcrumbSchema =
 
     <!-- Cloudflare Web Analytics（Cookieless・同意バナー不要） -->
     <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "a5d586563d2842879a0955a95fe405f9"}'></script>
+
+    <!-- Google tag (gtag.js) — GA4 で reaction_log 自動収集用 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9BSW0Q1T8N"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-9BSW0Q1T8N');
+    </script>
   </head>
 
   <body>
