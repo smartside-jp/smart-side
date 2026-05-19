@@ -118,7 +118,7 @@ OpenAI が公式に認め、修正パッチを Redis 開発元に提供して収
 
 **「Exfiltration of personal information from ChatGPT via prompt injection」**（[arXiv:2406.00199](https://arxiv.org/html/2406.00199v2)）は、ChatGPT 4 / 4o の **memory 機能 + 不可視 Markdown 画像** を悪用して、ユーザーの会話履歴を攻撃者のサーバーに送り出す攻撃を実証した論文です。
 
-2025年には、セキュリティ企業 Tenable が **7種類の攻撃手法** を発表。多くは「間接プロンプトインジェクション」で、ChatGPT が読み込む外部ウェブページに攻撃文を仕込み、それを ChatGPT に処理させることで実行される、というもの。
+2025年11月、セキュリティ企業 Tenable が **「HackedGPT」と呼ばれる7種類の脆弱性**（GPT-4o と GPT-5 が対象）を発表しました。多くは「間接プロンプトインジェクション」で、ChatGPT が読み込む外部ウェブページに攻撃文を仕込み、それを ChatGPT に処理させることで実行される、というもの。
 
 メカニズムを大雑把に言うと：
 
