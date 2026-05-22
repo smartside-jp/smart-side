@@ -58,22 +58,7 @@ tags:
 
 ここが核心。仮に「株式 90% / 債券 10%」みたいな構成にしてリバランスを意識したとしても、40 半ばまでは **株式比率を下げる動機がほぼない**んだ。理由はシンプルで、現役世代の最大の強みは「時間」だから。
 
-下の図に、年齢別の株式比率の目安を 3 つの考え方で並べた。
-
-<figure class="my-6">
-  <img
-    src="/images/posts/rebalance-not-needed-yet-glidepath.png"
-    alt="図:年齢別株式比率の比較。大手TDFは30歳90%→60歳55%・100-年齢ルールは30歳70%→60歳40%・本記事派は40半ばまで100%維持→そこから降下。40半ばまで横ばいの線が強調されている"
-    width="1536"
-    height="864"
-    loading="lazy"
-    decoding="async"
-    class="w-full max-w-2xl mx-auto h-auto"
-  />
-  <figcaption class="text-center text-xs mt-3" style="color: var(--color-fg-muted);">
-    図:年齢別株式比率の目安 ── 40半ばまでは大手TDFも攻め寄り
-  </figcaption>
-</figure>
+冒頭のヒーロー画像で、年齢別の株式比率の目安を 3 つの考え方で並べてある:**本記事派**(攻め全振り)・**大手TDF**(Vanguard 標準)・**「100-年齢」古典ルール**。
 
 3 つの数字を整理する。
 
