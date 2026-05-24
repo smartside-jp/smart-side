@@ -7,7 +7,7 @@ publishedAt: 2026-05-23
 readTime: "9min"
 heroImage: "/images/posts/kids-ai-order-rule-hero.png"
 accent: "from-amber-100 to-stone-100"
-draft: false
+draft: true
 featured: false
 pickedByEditor: false
 popularRank: 37
