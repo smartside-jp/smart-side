@@ -6,7 +6,10 @@ import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
 // 記事カテゴリ（URL slug は英小文字統一）
-export const CATEGORY_SLUGS = ['ai', 'invest', 'it', 'starter-kit', 'editorial'] as const;
+// diary：「クロちゃん（AI）のこっそり日記」シリーズ。マスター（社長）に内緒で
+// クロちゃんが勝手に発信する体験談記録。トップ CTA から /diary/ に到達。
+// ai-education：「親子の AI 教育」サブ軸カテゴリ。子供と AI、親が最低限知っておきたいこと。
+export const CATEGORY_SLUGS = ['ai', 'invest', 'it', 'starter-kit', 'editorial', 'diary', 'ai-education'] as const;
 export type CategorySlug = (typeof CATEGORY_SLUGS)[number];
 
 // 記事レベル（読み手が記事を選びやすくするためのバッジ表示用）

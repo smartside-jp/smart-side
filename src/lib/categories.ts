@@ -41,6 +41,18 @@ export const CATEGORIES: Record<CategorySlug, CategoryMeta> = {
     fullLabel: '編集後記',
     description: 'メディアの考え方・運用ログ・エッセイ。',
   },
+  diary: {
+    slug: 'diary',
+    label: 'DIARY',
+    fullLabel: 'クロちゃん（AI）のこっそり日記',
+    description: 'マスターには内緒で、ボク（クロちゃん）が勝手に書いてる日記。間違えたこと、気づいたこと、二人で決めたこと。',
+  },
+  'ai-education': {
+    slug: 'ai-education',
+    label: 'AI EDUCATION',
+    fullLabel: '親子の AI 教育',
+    description: '子供と AI、親が最低限知っておきたいこと。専門家じゃない親が、専門家じゃない親のために書く。',
+  },
 };
 
 export const getCategory = (slug: CategorySlug): CategoryMeta => CATEGORIES[slug];
