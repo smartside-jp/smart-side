@@ -1,0 +1,79 @@
+---
+// 投資記事末 → 資産形成 健康診断アプリ への共通CTA（集客1番）
+// 表示条件：category === 'invest' の記事のみ（[...slug].astro 側で制御）
+// 計測：UTM 付与 + クリックで GA4 イベント（送り出し側計測・smart-side の既存 GA4 を使用）
+// 4条件①匿名遵守：実名・所属を出さない
+//
+// props:
+//   slug … 記事スラッグ（UTM の utm_content / GA4 イベントの article_slug に使う）
+
+interface Props {
+  slug: string;
+}
+const { slug } = Astro.props;
+
+const APP_URL = 'https://smartside-jp.github.io/asset-planning-checkup/';
+const REPO_URL = 'https://github.com/smartside-jp/asset-planning-checkup';
+const href = `${APP_URL}?utm_source=smartside&utm_medium=article_cta&utm_campaign=checkup&utm_content=${slug}`;
+
+// GA4 クリックイベント（gtag があれば送信・無くてもリンクは動く）
+const onclick = `if(window.gtag){gtag('event','cta_checkup_click',{article_slug:'${slug}'});}`;
+---
+
+<aside class="max-w-3xl mx-auto px-6 md:px-12 mb-12 md:mb-16">
+  <div
+    class="rounded-lg border p-6 md:p-8"
+    style="border-color: rgba(10,10,10,0.12); background-color: var(--color-bg-section);"
+  >
+    <p
+      class="text-xs mb-3"
+      style="font-family: var(--font-mono); letter-spacing: 0.1em; color: var(--color-fg-muted);"
+    >
+      — FREE TOOL
+    </p>
+    <h3
+      class="text-xl md:text-2xl mb-3 leading-snug"
+      style="font-family: var(--font-jp-serif); font-weight: 700;"
+    >
+      で、自分の場合はどうなんだろう？
+    </h3>
+    <p
+      class="text-sm md:text-base leading-relaxed mb-5"
+      style="font-family: var(--font-jp-sans); color: var(--color-fg-muted);"
+    >
+      このまま読み流すより、いちど自分の数字で見てみると早いです。<strong style="color: var(--color-accent);">資産形成 健康診断</strong>は、保険・NISA・住宅・老後を一気に見て、見直しの余地を信号で出してくれる無料ツールです。
+    </p>
+
+    {/* 透明性・安全性（「データ蓄積に使われそう」という警戒に事実で応える） */}
+    <div
+      class="rounded-md p-4 mb-6"
+      style="background-color: #ffffff; border: 1px solid rgba(10,10,10,0.10);"
+    >
+      <p
+        class="text-xs mb-2 font-bold"
+        style="font-family: var(--font-jp-sans); color: var(--color-accent);"
+      >
+        🔒 入力したデータの扱い
+      </p>
+      <ul class="space-y-1.5 text-xs leading-relaxed" style="font-family: var(--font-jp-sans); color: var(--color-fg-muted);">
+        <li>・入力した内容は<strong style="color: var(--color-accent);">あなたの端末の中だけ</strong>に保存され、こちらのサーバーには<strong style="color: var(--color-accent);">一切送られません</strong>。</li>
+        <li>・<strong style="color: var(--color-accent);">登録もメールアドレスも不要</strong>。誰が何を入力したか、こちらには分かりません。</li>
+        <li>・プログラムは <a href={REPO_URL} target="_blank" rel="noopener" class="underline" style="color: var(--color-accent);">GitHub で公開</a>しているので、「本当に送信していないか」を誰でも確かめられます。</li>
+      </ul>
+    </div>
+
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener"
+      onclick={onclick}
+      class="block w-full sm:inline-block sm:w-auto text-center px-7 py-3 rounded-md text-sm md:text-base font-bold transition-opacity hover:opacity-85"
+      style="background-color: var(--color-accent); color: #ffffff; font-family: var(--font-jp-sans);"
+    >
+      資産形成 健康診断をやってみる →
+    </a>
+    <p class="text-xs mt-3" style="color: var(--color-fg-muted);">
+      無料・登録不要／所要 5〜10 分
+    </p>
+  </div>
+</aside>
