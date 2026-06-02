@@ -71,4 +71,59 @@
     text-transform: uppercase;
     color: var(--color-fg-muted);
   }
+
+  /* マーカー強調のバリエーション（2026-05-27 追加）
+     <mark> 単体は Tailwind Typography デフォルトの黄色マーカー風。
+     色違いを使いたい時だけクラスで切り替える：
+       <mark class="hi-pink">…</mark>  ピンク（重要・警告寄り）
+       <mark class="hi-blue">…</mark>  ブルー（情報・補足寄り）
+     使いすぎ注意：1記事 1〜2 箇所を目安に。 */
+  .prose mark.hi-pink {
+    background-color: #fce4ec;
+    color: inherit;
+    padding: 0 0.1em;
+    border-radius: 0.1em;
+  }
+  .prose mark.hi-blue {
+    background-color: #e3f2fd;
+    color: inherit;
+    padding: 0 0.1em;
+    border-radius: 0.1em;
+  }
+
+  /* H2 ラベル風見出し（2026-05-27 追加・全記事適用）
+     見出しと本文中の強調（太字・マーカー等）の区別を明確化するため、
+     H2 を「ラベル風の濃色帯」にして視覚階層をはっきりさせる。
+     Tailwind Typography が prose h2 の color に強い specificity で当てているため、
+     確実に上書きするため !important を付与。 */
+  .prose h2 {
+    background-color: var(--color-accent) !important;
+    color: #f5f5f3 !important;
+    padding: 0.55em 0.9em !important;
+    border-radius: 0.4rem !important;
+    font-size: 1.35rem !important;
+    line-height: 1.5 !important;
+    margin-top: 2.5em !important;
+    margin-bottom: 1em !important;
+    border-bottom: none !important;
+    font-weight: 700 !important;
+  }
+  .prose h2:first-child {
+    margin-top: 0 !important;
+  }
+
+  /* L2/L3 用 文字色クラス（2026-05-27 追加）
+     赤文字＝警告・否定・損失系 / 青文字＝情報・肯定・推奨系
+     使い方： <span class="text-red">…</span> / <span class="text-blue">…</span>
+     太字やマーカーと組み合わせて L2/L3 強度を調整する。
+     Tailwind Typography が <strong>/<em> 内に独自色を当てるため、
+     ネスト要素にも色が届くよう子孫セレクタ + !important で確実に上書き。 */
+  .prose .text-red,
+  .prose .text-red * {
+    color: #b91c1c !important;
+  }
+  .prose .text-blue,
+  .prose .text-blue * {
+    color: #1d4ed8 !important;
+  }
 }

@@ -80,7 +80,7 @@ tags:
 
 そこから自作アプリに踏み込んで Google Antigravity / Opal を触りましたが、システム開発初心者のまま遊び感覚で1日やってもまともに動きません。自律的な繰り返し実行を求めて Python に手を出すも、見たこともない英数字の海に苦笑して AI コーディングに切り替え。最終的に **Claude Code** に流れ着いて、雰囲気を伝えるだけでアプリや Web サイトが立ち上がるのを見て、初めて「感動」しました。
 
-→ 詳しくは [Claude Code 最低限セットアップ](/posts/claude-code-minimum-setup)・[ChatGPT vs Claude 2026](/posts/chatgpt-vs-claude-2026)・[非エンジニア向け MCP 入門](/posts/mcp-non-engineer-intro) で。
+→ 詳しくは [Claude Code 最低限セットアップ](/posts/claude-code-minimum-setup)・[非エンジニア向け MCP 入門](/posts/mcp-non-engineer-intro) で。
 
 ## 投資 ─ 7年<wbr>塗り替えられなかった<wbr>3要素
 
@@ -92,7 +92,7 @@ tags:
 
 ただし、ひとつだけ補足があります。**3要素のうち「時間」は、自分の年齢と残り運用期間によって長さが違います。** 残り20年以上ある人と、残り10年の人では、同じ商品でも振る舞いがまったく変わる。年齢が上がるほど「時間で平均化する」効果は弱まりますから、その分は「リスク資産の比率を下げる」「現金・債券を厚めに持つ」など別の軸で調整する必要があります。だから「時間×インデックス×積み立て」は万能の処方箋ではなく、自分の残り時間にあわせて読み替えるための **公式** だと思っています。
 
-→ 詳しくは [新NISA は eMAXIS Slim 1本でいい](/posts/nisa-emaxis-slim-only)・[iDeCo vs NISA 優先順位](/posts/ideco-vs-nisa-priority)・[投資ツールを削る](/posts/investment-tools-strip) で。
+→ 詳しくは [新NISA は eMAXIS Slim 1本でいい](/posts/nisa-emaxis-slim-only)・[iDeCo vs NISA 優先順位](/posts/ideco-vs-nisa-priority) で。
 
 ## IT ─ 数百人の事故から<wbr>逆算した<wbr>3点セット
 
@@ -102,7 +102,7 @@ tags:
 
 ただ、ツールを揃えれば終わりではありません。1Password も 2段階認証もバックアップも、使い方を誤ったら防御は崩れます。新しい詐欺の手口、新しいフィッシングの形、新しい脆弱性。これらは毎月のように更新されていきます。**最終的にいちばん強い防御装置は、あなた自身のリテラシー** です。ツールはその土台を底上げするだけで、上に立つのは結局、人。だから IT のスターターキットは、組み終えてからが本番だと思っています。
 
-→ 詳しくは [1Password と 2段階認証で守るベースライン](/posts/1password-2fa-baseline)・[3-2-1 バックアップルール](/posts/backup-3-2-1-rule)・[クラウド vs ローカルストレージ](/posts/cloud-vs-local-storage) で。
+→ 詳しくは [1Password と 2段階認証で守るベースライン](/posts/1password-2fa-baseline)・[3-2-1 バックアップルール](/posts/backup-3-2-1-rule) で。
 
 ## この記事も<wbr>疑ってください
 
