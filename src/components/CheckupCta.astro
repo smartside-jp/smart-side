@@ -46,7 +46,7 @@ const onclick = `if(window.gtag){gtag('event','cta_checkup_click',{article_slug:
 
     {/* 透明性・安全性（「データ蓄積に使われそう」という警戒に事実で応える） */}
     <div
-      class="rounded-md p-4 mb-6"
+      class="rounded-md p-4 mb-3"
       style="background-color: #ffffff; border: 1px solid rgba(10,10,10,0.10);"
     >
       <p
@@ -59,6 +59,23 @@ const onclick = `if(window.gtag){gtag('event','cta_checkup_click',{article_slug:
         <li>・入力した内容は<strong style="color: var(--color-accent);">あなたの端末の中だけ</strong>に保存され、こちらのサーバーには<strong style="color: var(--color-accent);">一切送られません</strong>。</li>
         <li>・<strong style="color: var(--color-accent);">登録もメールアドレスも不要</strong>。誰が何を入力したか、こちらには分かりません。</li>
         <li>・プログラムは <a href={REPO_URL} target="_blank" rel="noopener" class="underline" style="color: var(--color-accent);">GitHub で公開</a>しているので、「本当に送信していないか」を誰でも確かめられます。</li>
+      </ul>
+    </div>
+
+    {/* 立場（営業行為ゼロ・中立性）── 「結局なにか売られるんでしょ」という警戒に事実で応える */}
+    <div
+      class="rounded-md p-4 mb-6"
+      style="background-color: #ffffff; border: 1px solid rgba(10,10,10,0.10);"
+    >
+      <p
+        class="text-xs mb-2 font-bold"
+        style="font-family: var(--font-jp-sans); color: var(--color-accent);"
+      >
+        ⚖️ このツールの立場
+      </p>
+      <ul class="space-y-1.5 text-xs leading-relaxed" style="font-family: var(--font-jp-sans); color: var(--color-fg-muted);">
+        <li>・金融商品・保険商品の<strong style="color: var(--color-accent);">販売や紹介は一切ありません</strong>。アフィリエイトリンクも広告もなし。</li>
+        <li>・商品を売らない立場だから、保険でも証券でも<strong style="color: var(--color-accent);">売り手側の都合が混じらない、中立な見直し</strong>を信号で出せます。</li>
       </ul>
     </div>
 
