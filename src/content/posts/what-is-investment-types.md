@@ -191,6 +191,13 @@ A. 業界定番の処方はこれ：
 
 「全部やる」じゃなく「<mark>**自分に合うものを選ぶ**</mark>」のが投資です。深く考えすぎず、ひとまず<span class="text-blue">投資信託</span>から。
 
+<aside class="not-prose my-10 rounded-md p-5 md:p-6" style="background-color: var(--color-bg-section); border: 1px solid rgba(10,10,10,0.12);">
+  <p style="font-family: var(--font-mono); font-size: 0.72em; letter-spacing: 0.12em; color: var(--color-fg-muted); margin: 0 0 0.6em;">— FREE TOOL</p>
+  <p style="font-family: var(--font-jp-serif); font-weight: 700; font-size: 1.18em; line-height: 1.5; margin: 0 0 0.6em;">選んだ1つ、今の保険・貯金とねじれてない?</p>
+  <p style="font-size: 0.92em; line-height: 1.75; color: var(--color-fg-muted); margin: 0 0 1.1em;">投資の種類だけで判断すると、保険や貯金とのバランスを見落としがち。<strong style="color: var(--color-accent);">資産形成 健康診断</strong>(無料・5〜10分・登録不要・端末内保存)で全体のねじれを信号で確認できます。</p>
+  <a href="https://smartside-jp.github.io/asset-planning-checkup/?utm_source=smartside&utm_medium=article_cta&utm_campaign=checkup&utm_content=what-is-investment-types&utm_term=inline" target="_blank" rel="noopener" style="display: inline-block; padding: 0.65em 1.5em; border-radius: 4px; background-color: var(--color-accent); color: #ffffff; font-weight: 700; font-size: 0.92em; text-decoration: none;">資産形成 健康診断をやってみる →</a>
+</aside>
+
 ## 次に読むなら
 
 具体的に NISA で投資信託を始めてみたいなら：

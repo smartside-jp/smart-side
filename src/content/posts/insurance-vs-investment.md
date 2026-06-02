@@ -332,6 +332,13 @@ LIMRA（米国の生命保険業界団体）の最新データでは：
 
 複雑な商品ほど、**シンプルな数字** で読み解く。これが、保険でも投資信託でも共通する判断軸です。
 
+<aside class="not-prose my-10 rounded-md p-5 md:p-6" style="background-color: var(--color-bg-section); border: 1px solid rgba(10,10,10,0.12);">
+  <p style="font-family: var(--font-mono); font-size: 0.72em; letter-spacing: 0.12em; color: var(--color-fg-muted); margin: 0 0 0.6em;">— FREE TOOL</p>
+  <p style="font-family: var(--font-jp-serif); font-weight: 700; font-size: 1.18em; line-height: 1.5; margin: 0 0 0.6em;">自分の家計、保険に寄りすぎてない?</p>
+  <p style="font-size: 0.92em; line-height: 1.75; color: var(--color-fg-muted); margin: 0 0 1.1em;">「保障 + 運用を分ける」を頭で分かった後は、自分の数字で見ると一気に近づく。<strong style="color: var(--color-accent);">資産形成 健康診断</strong>(無料・5〜10分・登録不要・端末内保存)が、保険・NISA・住宅・老後の見直し余地を信号で出します。</p>
+  <a href="https://smartside-jp.github.io/asset-planning-checkup/?utm_source=smartside&utm_medium=article_cta&utm_campaign=checkup&utm_content=insurance-vs-investment&utm_term=inline" target="_blank" rel="noopener" style="display: inline-block; padding: 0.65em 1.5em; border-radius: 4px; background-color: var(--color-accent); color: #ffffff; font-weight: 700; font-size: 0.92em; text-decoration: none;">資産形成 健康診断をやってみる →</a>
+</aside>
+
 ---
 
 ## ここから先の話

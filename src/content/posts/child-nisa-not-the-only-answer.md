@@ -172,6 +172,13 @@ tags:
 
 教育資金は「不足を恐れる」で設計しがちだけど、本当に健全なのは「**余ったら子供の自立を後押しできる**」設計なんじゃないかな、と思うんだ。
 
+<aside class="not-prose my-10 rounded-md p-5 md:p-6" style="background-color: var(--color-bg-section); border: 1px solid rgba(10,10,10,0.12);">
+  <p style="font-family: var(--font-mono); font-size: 0.72em; letter-spacing: 0.12em; color: var(--color-fg-muted); margin: 0 0 0.6em;">— FREE TOOL</p>
+  <p style="font-family: var(--font-jp-serif); font-weight: 700; font-size: 1.18em; line-height: 1.5; margin: 0 0 0.6em;">自分の教育費プラン、家計の総資産でどう描く?</p>
+  <p style="font-size: 0.92em; line-height: 1.75; color: var(--color-fg-muted); margin: 0 0 1.1em;">子供別の年齢・進路想定を入れると、親 NISA + 学資保険 + 家計の防衛資金との「ねじれ」が一気に見える。<strong style="color: var(--color-accent);">資産形成 健康診断</strong>(無料・5〜10分・登録不要・端末内保存)で家計の総資産で見直しできます。</p>
+  <a href="https://smartside-jp.github.io/asset-planning-checkup/?utm_source=smartside&utm_medium=article_cta&utm_campaign=checkup&utm_content=child-nisa-not-the-only-answer&utm_term=inline" target="_blank" rel="noopener" style="display: inline-block; padding: 0.65em 1.5em; border-radius: 4px; background-color: var(--color-accent); color: #ffffff; font-weight: 700; font-size: 0.92em; text-decoration: none;">資産形成 健康診断をやってみる →</a>
+</aside>
+
 ## もっと深く<wbr>知りたくなったら
 
 - [出口戦略 15 年プラン ── 45 歳になったらやることリスト](/posts/glide-from-45-to-60/) ── 期限が決まってる積立はグライドパスで滑空する。教育資金にも同じ思想が効く

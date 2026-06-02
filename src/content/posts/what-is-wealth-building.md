@@ -158,6 +158,13 @@ A. 順番はこれが定番：
 
 「全部やる」じゃなく「**自分に合うものを選ぶ**」のが資産形成です。深く考えすぎず、ひとまず現状把握から。
 
+<aside class="not-prose my-10 rounded-md p-5 md:p-6" style="background-color: var(--color-bg-section); border: 1px solid rgba(10,10,10,0.12);">
+  <p style="font-family: var(--font-mono); font-size: 0.72em; letter-spacing: 0.12em; color: var(--color-fg-muted); margin: 0 0 0.6em;">— FREE TOOL</p>
+  <p style="font-family: var(--font-jp-serif); font-weight: 700; font-size: 1.18em; line-height: 1.5; margin: 0 0 0.6em;">書き出した中身、ねじれてない?</p>
+  <p style="font-size: 0.92em; line-height: 1.75; color: var(--color-fg-muted); margin: 0 0 1.1em;">「全部貯金じゃん」と気づいたら、次は <strong style="color: var(--color-accent);">資産形成 健康診断</strong>(無料・5〜10分・登録不要・端末内保存)で配分のねじれを見ておくと早いです。</p>
+  <a href="https://smartside-jp.github.io/asset-planning-checkup/?utm_source=smartside&utm_medium=article_cta&utm_campaign=checkup&utm_content=what-is-wealth-building&utm_term=inline" target="_blank" rel="noopener" style="display: inline-block; padding: 0.65em 1.5em; border-radius: 4px; background-color: var(--color-accent); color: #ffffff; font-weight: 700; font-size: 0.92em; text-decoration: none;">資産形成 健康診断をやってみる →</a>
+</aside>
+
 ## 次に読むなら
 
 具体的に NISA を始めてみたいなら：

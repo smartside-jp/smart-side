@@ -131,6 +131,13 @@ tags:
 
 「ローン額しか見てない」状態だと、30 年後の総支出を 1,000 万単位で見誤る ── これは結構大きい話だと思う。
 
+<aside class="not-prose my-10 rounded-md p-5 md:p-6" style="background-color: var(--color-bg-section); border: 1px solid rgba(10,10,10,0.12);">
+  <p style="font-family: var(--font-mono); font-size: 0.72em; letter-spacing: 0.12em; color: var(--color-fg-muted); margin: 0 0 0.6em;">— FREE TOOL</p>
+  <p style="font-family: var(--font-jp-serif); font-weight: 700; font-size: 1.18em; line-height: 1.5; margin: 0 0 0.6em;">自分の家計、住宅の維持費まで含めて見えてる?</p>
+  <p style="font-size: 0.92em; line-height: 1.75; color: var(--color-fg-muted); margin: 0 0 1.1em;">住宅ローン+取得価格+ボーナス払いを入れると、住宅費が NISA や老後の積立を圧迫してないかが一気に見える。<strong style="color: var(--color-accent);">資産形成 健康診断</strong>(無料・5〜10分・登録不要・端末内保存)が、見直しの余地を信号で出します。</p>
+  <a href="https://smartside-jp.github.io/asset-planning-checkup/?utm_source=smartside&utm_medium=article_cta&utm_campaign=checkup&utm_content=hidden-cost-of-owning-home&utm_term=inline" target="_blank" rel="noopener" style="display: inline-block; padding: 0.65em 1.5em; border-radius: 4px; background-color: var(--color-accent); color: #ffffff; font-weight: 700; font-size: 0.92em; text-decoration: none;">資産形成 健康診断をやってみる →</a>
+</aside>
+
 ## もっと深く<wbr>知りたくなったら
 
 - [生活防衛資金は「過去 1 年の出金平均」で決まる](/posts/emergency-fund-by-actual-spending/) ── 防衛資金と修繕費バッファは別管理が安全
