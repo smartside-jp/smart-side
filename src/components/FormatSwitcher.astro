@@ -1,0 +1,257 @@
+---
+// 記事の3導線「📖読む / ▶見る / 🎧聴く」切替バー
+// 置き場所：記事タイトル＋リードの直下・本文の手前（[...slug].astro）
+// 主旨：文字の羅列が苦手な人へのアクセシビリティ補完。離脱させずページ内で完結させる
+// 出し分け：
+//   読む … 常にアクティブ（＝今いるページ）
+//   見る … videoUrl があれば点灯→クリックで YouTube iframe をその場展開（遅延読込）。無ければ「準備中」
+//   聴く … audioUrl があれば点灯→クリックで <audio> をその場展開。無ければ「準備中」
+// 計測：開いたら GA4 イベント（format_video_open / format_audio_play）
+// 4条件①匿名遵守：著者名・地域情報は出さない
+//
+// props:
+//   slug      … 記事スラッグ（GA4 イベントの article_slug・要素の一意化に使う）
+//   videoUrl  … 動画版（YouTube の URL or 動画ID）。任意
+//   audioUrl  … 音声版（mp3 等の URL）。任意
+
+interface Props {
+  slug: string;
+  videoUrl?: string;
+  audioUrl?: string;
+}
+const { slug, videoUrl, audioUrl } = Astro.props;
+
+// YouTube の URL / 短縮URL / 生IDのいずれでも embed URL に正規化する
+function toYouTubeEmbed(input: string): string {
+  const raw = input.trim();
+  // すでに embed 形式ならそのまま
+  if (raw.includes('/embed/')) return raw;
+  let id = '';
+  const watch = raw.match(/[?&]v=([\w-]{11})/);
+  const short = raw.match(/youtu\.be\/([\w-]{11})/);
+  const shorts = raw.match(/\/shorts\/([\w-]{11})/);
+  if (watch) id = watch[1];
+  else if (short) id = short[1];
+  else if (shorts) id = shorts[1];
+  else if (/^[\w-]{11}$/.test(raw)) id = raw; // 生のID
+  // rel=0：関連動画を自チャンネルに限定（離脱抑制）
+  return id ? `https://www.youtube.com/embed/${id}?rel=0` : raw;
+}
+
+const hasVideo = !!videoUrl;
+const hasAudio = !!audioUrl;
+const embedUrl = hasVideo ? toYouTubeEmbed(videoUrl!) : '';
+
+// 一意なパネルID（同一ページに複数置かれても衝突しないよう slug を混ぜる）
+const uid = `fmt-${slug}`;
+---
+
+<div class="format-switcher max-w-3xl mx-auto px-6 md:px-12 mb-10 md:mb-12" data-uid={uid}>
+  {/* ── 切替ピル ── */}
+  <p class="meta text-[10px] mb-3" style="font-family: var(--font-mono); letter-spacing: 0.12em; color: var(--color-fg-muted);">
+    — この記事の楽しみ方
+  </p>
+  <div class="flex flex-wrap gap-2.5" role="group" aria-label="記事の形式を選ぶ">
+    {/* 読む（常にアクティブ） */}
+    <span class="fmt-pill fmt-active" aria-current="true">
+      <span class="fmt-ico">📖</span>読む
+    </span>
+
+    {/* 見る */}
+    {hasVideo ? (
+      <button type="button" class="fmt-pill fmt-toggle" data-target="video" aria-expanded="false" aria-controls={`${uid}-video`}>
+        <span class="fmt-ico">▶</span>見る
+      </button>
+    ) : (
+      <span class="fmt-pill fmt-soon" aria-disabled="true">
+        <span class="fmt-ico">▶</span>見る<span class="fmt-soon-tag">準備中</span>
+      </span>
+    )}
+
+    {/* 聴く */}
+    {hasAudio ? (
+      <button type="button" class="fmt-pill fmt-toggle" data-target="audio" aria-expanded="false" aria-controls={`${uid}-audio`}>
+        <span class="fmt-ico">🎧</span>聴く
+      </button>
+    ) : (
+      <span class="fmt-pill fmt-soon" aria-disabled="true">
+        <span class="fmt-ico">🎧</span>聴く<span class="fmt-soon-tag">準備中</span>
+      </span>
+    )}
+  </div>
+
+  {/* ── 展開パネル：動画 ── */}
+  {hasVideo && (
+    <div id={`${uid}-video`} class="fmt-panel" hidden>
+      <div class="fmt-video-frame">
+        {/* iframe は data-src 退避→初回オープン時に src 注入（遅延読込でページ速度を守る） */}
+        <iframe
+          data-src={embedUrl}
+          title="動画で見る"
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  )}
+
+  {/* ── 展開パネル：音声 ── */}
+  {hasAudio && (
+    <div id={`${uid}-audio`} class="fmt-panel" hidden>
+      <div class="fmt-audio-box">
+        <p class="fmt-audio-label">🎧 音声版（予備知識ゼロでも分かる「解説」）</p>
+        <audio controls preload="none" src={audioUrl}>
+          お使いのブラウザは音声再生に対応していません。
+        </audio>
+      </div>
+    </div>
+  )}
+</div>
+
+<style>
+  .fmt-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    font-size: 0.85rem;
+    font-family: var(--font-jp-sans);
+    font-weight: 700;
+    padding: 0.5em 1em;
+    border-radius: 999px;
+    border: 1px solid rgba(10, 10, 10, 0.18);
+    line-height: 1;
+    white-space: nowrap;
+  }
+  .fmt-ico { font-size: 0.95em; }
+
+  /* 読む：アクティブ（紺） */
+  .fmt-active {
+    background-color: var(--color-accent);
+    color: #ffffff;
+    border-color: var(--color-accent);
+  }
+
+  /* 見る・聴く：点灯（押せる） */
+  .fmt-toggle {
+    background-color: #ffffff;
+    color: var(--color-fg);
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+  .fmt-toggle:hover {
+    background-color: var(--color-accent);
+    color: #ffffff;
+    border-color: var(--color-accent);
+  }
+  .fmt-toggle[aria-expanded="true"] {
+    background-color: var(--color-accent);
+    color: #ffffff;
+    border-color: var(--color-accent);
+  }
+
+  /* 準備中：グレーアウト（押せない） */
+  .fmt-soon {
+    background-color: transparent;
+    color: var(--color-fg-muted);
+    border-style: dashed;
+    border-color: rgba(10, 10, 10, 0.18);
+    cursor: default;
+  }
+  .fmt-soon-tag {
+    font-size: 0.6rem;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    letter-spacing: 0.08em;
+    margin-left: 0.3em;
+    padding: 0.15em 0.45em;
+    border-radius: 4px;
+    background-color: rgba(10, 10, 10, 0.06);
+    color: var(--color-fg-muted);
+  }
+
+  /* 展開パネル */
+  .fmt-panel {
+    margin-top: 1rem;
+  }
+  .fmt-video-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+  .fmt-video-frame iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .fmt-audio-box {
+    border: 1px solid rgba(10, 10, 10, 0.12);
+    border-radius: 0.5rem;
+    padding: 1rem 1.2rem;
+    background-color: var(--color-bg-section);
+  }
+  .fmt-audio-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    font-family: var(--font-jp-sans);
+    color: var(--color-accent);
+    margin-bottom: 0.6rem;
+  }
+  .fmt-audio-box audio {
+    width: 100%;
+  }
+</style>
+
+<script is:inline define:vars={{ uid, slug }}>
+  (function () {
+    const root = document.querySelector(`.format-switcher[data-uid="${uid}"]`);
+    if (!root) return;
+
+    const toggles = root.querySelectorAll('.fmt-toggle');
+
+    function closeAll(except) {
+      toggles.forEach((btn) => {
+        const target = btn.getAttribute('data-target');
+        if (target === except) return;
+        const panel = document.getElementById(`${uid}-${target}`);
+        if (panel) panel.hidden = true;
+        btn.setAttribute('aria-expanded', 'false');
+      });
+    }
+
+    toggles.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-target'); // 'video' | 'audio'
+        const panel = document.getElementById(`${uid}-${target}`);
+        if (!panel) return;
+        const willOpen = panel.hidden;
+
+        // 他のパネルは閉じる（同時に1つだけ開く）
+        closeAll(target);
+
+        panel.hidden = !willOpen;
+        btn.setAttribute('aria-expanded', String(willOpen));
+
+        if (willOpen) {
+          // 動画：初回オープン時だけ iframe の src を注入（遅延読込）
+          if (target === 'video') {
+            const iframe = panel.querySelector('iframe');
+            if (iframe && !iframe.src && iframe.dataset.src) {
+              iframe.src = iframe.dataset.src;
+            }
+            if (window.gtag) gtag('event', 'format_video_open', { article_slug: slug });
+          }
+          if (target === 'audio') {
+            if (window.gtag) gtag('event', 'format_audio_play', { article_slug: slug });
+          }
+        }
+      });
+    });
+  })();
+</script>

@@ -42,6 +42,13 @@ const posts = defineCollection({
     pickedByEditor: z.boolean().default(false),
     popularRank: z.number().int().positive().optional(),
 
+    // コンテンツ形式（3導線「読む/見る/聴く」用・任意）
+    // videoUrl … 動画版（YouTube の URL or 動画ID）。設定があれば「▶見る」点灯
+    // audioUrl … 音声版（mp3 等の URL）。設定があれば「🎧聴く」点灯
+    // どちらも未設定なら該当ボタンは「準備中」グレーアウト表示
+    videoUrl: z.string().optional(),
+    audioUrl: z.string().optional(),
+
     // 公開制御
     draft: z.boolean().default(false),
 

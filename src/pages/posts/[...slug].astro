@@ -7,6 +7,7 @@ import { getCollection, render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import LevelBadge from '../../components/LevelBadge.astro';
 import CheckupCta from '../../components/CheckupCta.astro';
+import FormatSwitcher from '../../components/FormatSwitcher.astro';
 import { CATEGORIES } from '../../lib/categories';
 
 export async function getStaticPaths() {
@@ -101,6 +102,9 @@ const breadcrumb = [
         </p>
       )}
     </header>
+
+    {/* 3導線「読む / 見る / 聴く」：リード直下・本文手前。動画/音声が無い記事は該当ボタンが「準備中」表示 */}
+    <FormatSwitcher slug={post.id} videoUrl={post.data.videoUrl} audioUrl={post.data.audioUrl} />
 
     {/* ヒーロー：glossary（用語集）は枠ごと非表示・短い記事なのでタイトル直下から本文に入る。
         それ以外は heroImage があれば画像、なければグラデーションフォールバック。 */}
