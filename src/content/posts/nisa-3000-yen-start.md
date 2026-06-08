@@ -11,6 +11,8 @@ draft: false
 featured: false
 pickedByEditor: false
 popularRank: 8
+audioUrl: "https://github.com/smartside-jp/smart-side/releases/download/audio/nisa-3000-yen-start.m4a"
+videoUrl: "https://youtu.be/-ay1UzHjEFg"
 tags:
   - 投資
   - NISA
