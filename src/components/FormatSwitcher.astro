@@ -48,8 +48,10 @@ const uid = `fmt-${slug}`;
 
 <div class="format-switcher max-w-3xl mx-auto px-6 md:px-12 mb-10 md:mb-12" data-uid={uid}>
   {/* ── 切替ピル ── */}
-  <p class="meta text-[10px] mb-3" style="font-family: var(--font-mono); letter-spacing: 0.12em; color: var(--color-fg-muted);">
-    — この記事の楽しみ方
+  {/* ラベルは H2 の意匠（紺背景×白文字×角丸）を借りた「ミニ帯」。
+     幅は inline-flex で文字幅のみ・サイズは H2 の約7割に抑え、本文H2を食わない一段下の階層に位置付ける。 */}
+  <p class="fmt-label">
+    <span class="fmt-label-ico" aria-hidden="true">📐</span>この記事の楽しみ方
   </p>
   <div class="flex flex-wrap gap-2.5" role="group" aria-label="記事の形式を選ぶ">
     {/* 読む（常にアクティブ） */}
@@ -111,6 +113,32 @@ const uid = `fmt-${slug}`;
 </div>
 
 <style>
+  /* ラベル「📐この記事の楽しみ方」：H2帯（.prose h2）の意匠を借りたミニ帯
+     - 色・角丸・bg を H2 と共通化して「smart-side のラベル系統」と認識させる
+     - 幅(inline-flex)・font-size(0.95rem≒H2の7割)・padding(浅め) で本文H2より一段下の階層を作る */
+  .fmt-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    background-color: var(--color-accent);
+    color: #f5f5f3;
+    font-family: var(--font-jp-sans);
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.4;
+    padding: 0.35em 0.75em;
+    border-radius: 0.4rem;
+    letter-spacing: 0.02em;
+    margin-top: 0;
+    margin-bottom: 0.6rem;
+    max-width: 100%;
+    cursor: default;
+  }
+  .fmt-label-ico {
+    font-size: 1em;
+    line-height: 1;
+  }
+
   .fmt-pill {
     display: inline-flex;
     align-items: center;
