@@ -7,6 +7,8 @@ publishedAt: 2026-05-07
 readTime: "5min"
 heroImage: "/images/posts/what-is-wealth-building-hero.png"
 accent: "from-amber-200 to-orange-300"
+audioUrl: "https://github.com/smartside-jp/smart-side/releases/download/audio/what-is-wealth-building.m4a"
+videoUrl: "https://youtu.be/LblV5OXb2Cs"
 draft: false
 featured: false
 pickedByEditor: false
