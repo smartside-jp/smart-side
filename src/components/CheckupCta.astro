@@ -92,5 +92,13 @@ const onclick = `if(window.gtag){gtag('event','cta_checkup_click',{article_slug:
     <p class="text-xs mt-3" style="color: var(--color-fg-muted);">
       無料・登録不要／所要 5〜10 分
     </p>
+
+    {/* ツールの先：個別に相談したい人向けの控えめな導線（お問い合わせフォームへ）。
+        主役の健診CTAと競合しないよう、区切り線 + 小さめテキストで下に置く */}
+    <div class="mt-5 pt-4 border-t" style="border-color: rgba(10,10,10,0.10);">
+      <p class="text-xs md:text-sm leading-relaxed" style="font-family: var(--font-jp-sans); color: var(--color-fg-muted);">
+        ツールだけだと不安？ 資産形成について個別に相談したいときは、<a href="/about" class="underline underline-offset-2 font-bold" style="color: var(--color-accent);">お問い合わせ</a>からどうぞ。
+      </p>
+    </div>
   </div>
 </aside>
