@@ -177,13 +177,6 @@ A. 簡易テスト：「10万円が3ヶ月で6万円に下がっても、平気�
 
 「正解」じゃなく「**自分に合う**」を選ぶのが資産形成です。完璧を目指さず、今日の自分に合う配分から動き出す。動いてから考える方が、考えて動かないより圧倒的に良い。
 
-<aside class="not-prose my-10 rounded-md p-5 md:p-6" style="background-color: var(--color-bg-section); border: 1px solid rgba(10,10,10,0.12);">
-  <p style="font-family: var(--font-mono); font-size: 0.72em; letter-spacing: 0.12em; color: var(--color-fg-muted); margin: 0 0 0.6em;">— FREE TOOL</p>
-  <p style="font-family: var(--font-jp-serif); font-weight: 700; font-size: 1.18em; line-height: 1.5; margin: 0 0 0.6em;">4軸の答え、自分の数字で入れるとどう出る?</p>
-  <p style="font-size: 0.92em; line-height: 1.75; color: var(--color-fg-muted); margin: 0 0 1.1em;">時間 × リスク × 流動性 × 目的の4軸を自分の数字で入れると、<strong style="color: var(--color-accent);">資産形成 健康診断</strong>(無料・5〜10分・登録不要・端末内保存)が現状と見直しポイントを信号で出します。</p>
-  <a href="https://smartside-jp.github.io/asset-planning-checkup/?utm_source=smartside&utm_medium=article_cta&utm_campaign=checkup&utm_content=how-to-choose-wealth-building&utm_term=inline" target="_blank" rel="noopener" style="display: inline-block; padding: 0.65em 1.5em; border-radius: 4px; background-color: var(--color-accent); color: #ffffff; font-weight: 700; font-size: 0.92em; text-decoration: none;">資産形成 健康診断をやってみる →</a>
-</aside>
-
 ## ラインナップ4本 完走
 
 このラインナップは、これで完結です。お疲れさまでした。

@@ -156,13 +156,6 @@ JP Morgan 2024 によると、退職後も株式比率を少し増やすだけ�
 
 **設計の差が、晩年の安心を決める**。15 年は長く感じるけど、判断回数を減らせる時間でもあるんだ。
 
-<aside class="not-prose my-10 rounded-md p-5 md:p-6" style="background-color: var(--color-bg-section); border: 1px solid rgba(10,10,10,0.12);">
-  <p style="font-family: var(--font-mono); font-size: 0.72em; letter-spacing: 0.12em; color: var(--color-fg-muted); margin: 0 0 0.6em;">— FREE TOOL</p>
-  <p style="font-family: var(--font-jp-serif); font-weight: 700; font-size: 1.18em; line-height: 1.5; margin: 0 0 0.6em;">自分の年代、グライドパス的にどこに居る?</p>
-  <p style="font-size: 0.92em; line-height: 1.75; color: var(--color-fg-muted); margin: 0 0 1.1em;">「45 歳から準備・50 歳から実行」のタイムラインは、自分の年齢・既存資産・退職金見込みで描き方が変わる。<strong style="color: var(--color-accent);">資産形成 健康診断</strong>(無料・5〜10分・登録不要・端末内保存)が、いまの位置とリタイア試算(3%/5%/7%・年金繰下げ・退職金)を一気に出します。</p>
-  <a href="https://smartside-jp.github.io/asset-planning-checkup/?utm_source=smartside&utm_medium=article_cta&utm_campaign=checkup&utm_content=glide-from-45-to-60&utm_term=inline" target="_blank" rel="noopener" style="display: inline-block; padding: 0.65em 1.5em; border-radius: 4px; background-color: var(--color-accent); color: #ffffff; font-weight: 700; font-size: 0.92em; text-decoration: none;">資産形成 健康診断をやってみる →</a>
-</aside>
-
 ## もっと深く<wbr>知りたくなったら
 
 - [リバランスは今しなくていい ── 攻め全振りで同じ結論になる構造](/posts/rebalance-not-needed-yet/) ── 直前記事・「45 歳から準備を考え始める」前振り回収

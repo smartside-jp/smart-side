@@ -154,13 +154,6 @@ NISA、月3,000円から始めるとどうなるか。
 
 それくらいの話。深く考えすぎなくていいよ。
 
-<aside class="not-prose my-10 rounded-md p-5 md:p-6" style="background-color: var(--color-bg-section); border: 1px solid rgba(10,10,10,0.12);">
-  <p style="font-family: var(--font-mono); font-size: 0.72em; letter-spacing: 0.12em; color: var(--color-fg-muted); margin: 0 0 0.6em;">— FREE TOOL</p>
-  <p style="font-family: var(--font-jp-serif); font-weight: 700; font-size: 1.18em; line-height: 1.5; margin: 0 0 0.6em;">3,000円で始める前に、家計の全体像を一度だけ見ておく</p>
-  <p style="font-size: 0.92em; line-height: 1.75; color: var(--color-fg-muted); margin: 0 0 1.1em;">「準備が面倒で先延ばし」と同じくらい、もったいないのが「保険や貯金とのバランスを見ずに NISA だけ始める」こと。<strong style="color: var(--color-accent);">資産形成 健康診断</strong>(無料・5〜10分・登録不要・端末内保存)で全体のねじれを先に潰しておくと、3,000円の積立が長持ちします。</p>
-  <a href="https://smartside-jp.github.io/asset-planning-checkup/?utm_source=smartside&utm_medium=article_cta&utm_campaign=checkup&utm_content=nisa-3000-yen-start&utm_term=inline" target="_blank" rel="noopener" style="display: inline-block; padding: 0.65em 1.5em; border-radius: 4px; background-color: var(--color-accent); color: #ffffff; font-weight: 700; font-size: 0.92em; text-decoration: none;">資産形成 健康診断をやってみる →</a>
-</aside>
-
 ---
 
 この記事も疑ってもらっていい。30年後の計算は前提によってブレるし、年5%が保証されてるわけでもない。

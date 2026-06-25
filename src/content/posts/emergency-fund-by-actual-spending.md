@@ -147,13 +147,6 @@ tags:
 
 それで「自分の数字」が出る。あとは、その数字を眺めながら「今は厚めに取っておきたい」のか「もう少し攻めに振れるか」を、自分の段階で決めていく。
 
-<aside class="not-prose my-10 rounded-md p-5 md:p-6" style="background-color: var(--color-bg-section); border: 1px solid rgba(10,10,10,0.12);">
-  <p style="font-family: var(--font-mono); font-size: 0.72em; letter-spacing: 0.12em; color: var(--color-fg-muted); margin: 0 0 0.6em;">— FREE TOOL</p>
-  <p style="font-family: var(--font-jp-serif); font-weight: 700; font-size: 1.18em; line-height: 1.5; margin: 0 0 0.6em;">過去1年の出金平均を出した後、その額が今の家計に合ってる?</p>
-  <p style="font-size: 0.92em; line-height: 1.75; color: var(--color-fg-muted); margin: 0 0 1.1em;">月の出金平均が分かったら、保険・NISA・住宅・老後まで含めて全体を1回見ておくと、防衛資金の厚さの「自分の段階」が決めやすい。<strong style="color: var(--color-accent);">資産形成 健康診断</strong>(無料・5〜10分・登録不要・端末内保存)が信号で出します。</p>
-  <a href="https://smartside-jp.github.io/asset-planning-checkup/?utm_source=smartside&utm_medium=article_cta&utm_campaign=checkup&utm_content=emergency-fund-by-actual-spending&utm_term=inline" target="_blank" rel="noopener" style="display: inline-block; padding: 0.65em 1.5em; border-radius: 4px; background-color: var(--color-accent); color: #ffffff; font-weight: 700; font-size: 0.92em; text-decoration: none;">資産形成 健康診断をやってみる →</a>
-</aside>
-
 → [成長投資枠の使い方は「配分」で決まる](/posts/nisa-growth-by-allocation/)
 → [自動引き落としで投資が続く理由 ── クレカ積立は意思決定を捨てるための装置](/posts/credit-card-investment-auto-pilot/)
 → [NISA、月 3,000 円から始めるとどうなるか](/posts/nisa-3000-yen-start/)
