@@ -1,11 +1,16 @@
 ---
-// smart-side トップページ（misclog 構造踏襲）
+// smart-side トップページ（2026-07-01 投資集中リデザイン）
+// 並び：Hero(投資) → 診断ツール帯(間口) → FP相談(前面化) → 投資メイン(主役)
+//       → Popular+Editor's Pick(投資寄せ) → 用語集 → その他の読み物(AI・IT) → Starter Kit → 目次
 // 4条件①匿名遵守：地域情報・本名・実所属・偽ペンネーム・偽数値を出さない
 // データソース：Astro Content Collection 'posts'（schema: src/content.config.ts）
 
 import { getCollection, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import LevelBadge from '../components/LevelBadge.astro';
+import HeroInvest from '../components/HeroInvest.astro';
+import HomeToolsBand from '../components/HomeToolsBand.astro';
+import HomeFpConsult from '../components/HomeFpConsult.astro';
 import { CATEGORIES } from '../lib/categories';
 
 // ──────────── データ取得・派生 ────────────
@@ -16,8 +21,11 @@ const allPosts = await getCollection('posts', ({ data }) => !data.draft);
 const byPublishedDesc = (a: Post, b: Post) =>
   b.data.publishedAt.getTime() - a.data.publishedAt.getTime();
 
-// 新着4件
-const newPosts = [...allPosts].sort(byPublishedDesc).slice(0, 4);
+// 投資メイン（主役・最新6件）
+const investMain = allPosts
+  .filter((p) => p.data.category === 'invest')
+  .sort(byPublishedDesc)
+  .slice(0, 6);
 
 // Popular（popularRank 昇順・最大5件）
 const popular = allPosts
@@ -25,40 +33,47 @@ const popular = allPosts
   .sort((a, b) => (a.data.popularRank! - b.data.popularRank!))
   .slice(0, 5);
 
-// Recommend（編集部おすすめ・各カテゴリ AI/投資/IT から1本ずつ・最大3件）
-// pickedByEditor を満たす中から、featured 優先 → popularRank 昇順 → 新着順タイブレーク
-const recommendByCategory = (slug: 'ai' | 'invest' | 'it'): Post | undefined =>
-  allPosts
-    .filter((p) => p.data.category === slug && p.data.pickedByEditor)
-    .sort((a, b) => {
-      const fDiff = Number(b.data.featured) - Number(a.data.featured);
-      if (fDiff !== 0) return fDiff;
-      const aRank = a.data.popularRank ?? 999;
-      const bRank = b.data.popularRank ?? 999;
-      if (aRank !== bRank) return aRank - bRank;
-      return byPublishedDesc(a, b);
-    })[0];
+// Editor's Pick（投資寄せ：投資 最大3本＋AI 1本）
+// featured 優先 → popularRank 昇順 → 新着順タイブレーク
+const sortForPick = (a: Post, b: Post) => {
+  const fDiff = Number(b.data.featured) - Number(a.data.featured);
+  if (fDiff !== 0) return fDiff;
+  const aRank = a.data.popularRank ?? 999;
+  const bRank = b.data.popularRank ?? 999;
+  if (aRank !== bRank) return aRank - bRank;
+  return byPublishedDesc(a, b);
+};
+const pickInvest = allPosts
+  .filter((p) => p.data.category === 'invest' && p.data.pickedByEditor)
+  .sort(sortForPick)
+  .slice(0, 3);
+const pickAi = allPosts
+  .filter((p) => p.data.category === 'ai' && p.data.pickedByEditor)
+  .sort(sortForPick)
+  .slice(0, 1);
+const recommend: Post[] = [...pickInvest, ...pickAi];
+// フォールバック：pickedByEditor 指定が少ない時は投資の新着で最低3本まで補完
+if (recommend.length < 3) {
+  const fill = allPosts
+    .filter((p) => p.data.category === 'invest' && !recommend.includes(p))
+    .sort(byPublishedDesc)
+    .slice(0, 3 - recommend.length);
+  recommend.push(...fill);
+}
 
-const recommend = [
-  recommendByCategory('ai'),
-  recommendByCategory('invest'),
-  recommendByCategory('it'),
-].filter((p): p is Post => p !== undefined);
+// その他の読み物（AI 2番手＋IT 凍結を1枠に統合・小さく）
+const otherReads = [
+  ...allPosts.filter((p) => p.data.category === 'ai').sort(byPublishedDesc).slice(0, 4),
+  ...allPosts.filter((p) => p.data.category === 'it').sort(byPublishedDesc).slice(0, 2),
+];
 
-// カテゴリ別 4件ずつ
-const filterByCategory = (slug: 'ai' | 'invest' | 'it') =>
-  allPosts.filter((p) => p.data.category === slug).sort(byPublishedDesc).slice(0, 4);
-
-const categoryAI = filterByCategory('ai');
-const categoryInvest = filterByCategory('invest');
-const categoryIT = filterByCategory('it');
-
-// インデックス（カテゴリ件数表示）
+// 目次（投資を先頭・AI/ITは統合表示）
+const glossaryCount = allPosts.filter((p) => p.data.level === 'glossary').length;
 const indexCategories = [
-  { href: '/category/ai', label: CATEGORIES.ai.fullLabel, count: allPosts.filter((p) => p.data.category === 'ai').length },
   { href: '/category/invest', label: CATEGORIES.invest.fullLabel, count: allPosts.filter((p) => p.data.category === 'invest').length },
-  { href: '/category/it', label: CATEGORIES.it.fullLabel, count: allPosts.filter((p) => p.data.category === 'it').length },
+  { href: '/glossary', label: '用語集', count: glossaryCount },
   { href: '/starter-kit', label: CATEGORIES['starter-kit'].fullLabel, count: allPosts.filter((p) => p.data.category === 'starter-kit').length },
+  { href: '/category/ai', label: 'AI・IT', count: allPosts.filter((p) => p.data.category === 'ai' || p.data.category === 'it').length },
   { href: '/category/editorial', label: CATEGORIES.editorial.fullLabel, count: allPosts.filter((p) => p.data.category === 'editorial').length },
   { href: '/about', label: 'お問い合わせ', count: 0 },
 ];
@@ -79,76 +94,29 @@ const fallbackAccent = 'from-zinc-200 to-zinc-400';
 ---
 
 <BaseLayout>
-  {/* ─────────── HERO（背景画像 + テキストオーバーレイ / 雑誌風） ─────────── */}
-  <section class="relative overflow-hidden">
-    {/* 背景画像レイヤー（ChatGPT 生成のライフスタイル still-life） */}
-    <div
-      class="absolute inset-0 -z-10"
-      style="background-image: url('/images/hero-collection.png'); background-size: cover; background-position: center;"
-    />
-    {/* 左側だけ薄く overlay（テキストの可読性確保・右に向かって透明にフェード） */}
-    <div
-      class="absolute inset-0 -z-10"
-      style="background: linear-gradient(to right, rgba(250,249,245,0.85) 0%, rgba(250,249,245,0.55) 45%, rgba(250,249,245,0.0) 75%);"
-    />
+  {/* ─────────── HERO（投資集中版） ─────────── */}
+  <HeroInvest />
 
-    <div class="max-w-7xl mx-auto px-6 md:px-12 pt-16 md:pt-24 pb-20 md:pb-28">
-      <div class="max-w-3xl">
-        <p class="meta text-xs mb-8">— Issue 001 — Spring 2026</p>
-        <h1
-          class="text-4xl sm:text-5xl md:text-6xl leading-tight mb-8"
-          style="font-family: var(--font-jp-serif); font-weight: 700;"
-        >
-          「要らない9割」を<br class="sm:hidden"/>捨てる<br/>最低限<br class="sm:hidden"/>スターターキット
-        </h1>
-        <p
-          class="text-base md:text-lg leading-relaxed mb-10"
-          style="color: var(--color-fg-muted); font-family: var(--font-jp-sans);"
-        >
-          AI・投資・IT。世のテンプレを全部試して、削った先に残ったものだけ。<br/>
-          非エンジニアが書く、ミニマム実装メディア。
-        </p>
-        <div class="flex flex-wrap gap-3">
-          <a
-            href="/starter-kit"
-            class="inline-flex items-center px-6 py-3 text-sm hover:opacity-80 transition-opacity"
-            style="background-color: var(--color-fg); color: var(--color-fg-inverse); font-family: var(--font-jp-sans);"
-          >
-            スターターキットを読む →
-          </a>
-          <a
-            href="/archive"
-            class="inline-flex items-center px-6 py-3 text-sm border hover:bg-black/5 transition-colors"
-            style="border-color: var(--color-fg); color: var(--color-fg); font-family: var(--font-jp-sans);"
-          >
-            記事一覧→
-          </a>
-          <a
-            href="/diary"
-            class="inline-flex items-center px-6 py-3 text-sm border hover:bg-black/5 transition-colors"
-            style="border-color: var(--color-fg); color: var(--color-fg); font-family: var(--font-jp-sans);"
-          >
-            クロちゃん（AI）のこっそり日記→
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
+  {/* ─────────── 診断ツール帯（間口・集客1番） ─────────── */}
+  <HomeToolsBand />
 
-  {/* ─────────── NEW POSTS（4列） ─────────── */}
+  {/* ─────────── FP相談（前面化・その先の人的サポート） ─────────── */}
+  <HomeFpConsult />
+
+  {/* ─────────── 投資（メイン・主役） ─────────── */}
   <section class="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-20 border-t" style="border-color: rgba(10,10,10,0.08);">
     <div class="flex items-end justify-between mb-10">
       <div>
-        <p class="meta text-xs mb-2">— New Posts</p>
-        <h2 class="text-2xl md:text-3xl" style="font-family: var(--font-jp-serif); font-weight: 700;">新着記事</h2>
+        <p class="meta text-xs mb-2">— Money</p>
+        <h2 class="text-2xl md:text-3xl" style="font-family: var(--font-jp-serif); font-weight: 700;">{CATEGORIES.invest.fullLabel}</h2>
       </div>
-      <a href="/archive" class="text-xs hover:underline underline-offset-4" style="font-family: var(--font-mono); letter-spacing: 0.05em;">
+      <a href="/category/invest" class="text-xs hover:underline underline-offset-4" style="font-family: var(--font-mono); letter-spacing: 0.05em;">
         VIEW ALL →
       </a>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-12">
-      {newPosts.map((p) => (
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
+      {investMain.map((p) => (
         <a href={`/posts/${p.id}`} class="group block">
           {p.data.heroImage ? (
             <img
@@ -183,92 +151,116 @@ const fallbackAccent = 'from-zinc-200 to-zinc-400';
     </div>
   </section>
 
-  {/* ─────────── POPULAR + RECOMMEND（2カラム） ─────────── */}
-  <section class="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-20 border-t" style="border-color: rgba(10,10,10,0.08);">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-      {/* POPULAR */}
-      <div class="lg:col-span-5">
-        <p class="meta text-xs mb-2">— Popular</p>
-        <h2 class="text-2xl md:text-3xl mb-8" style="font-family: var(--font-jp-serif); font-weight: 700;">よく読まれている</h2>
-        <ol class="space-y-6">
-          {popular.map((p, i) => (
-            <li>
-              <a href={`/posts/${p.id}`} class="group flex gap-5 items-baseline">
-                <span class="text-3xl shrink-0 w-10 leading-none" style="font-family: var(--font-display); color: var(--color-fg-muted);">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <div>
-                  <div class="flex items-center gap-2 mb-1 flex-wrap">
-                    <LevelBadge level={p.data.level} size="sm" />
-                    <p class="meta text-[10px]">{categoryLabel(p.data.category)}</p>
+  {/* ─────────── POPULAR + RECOMMEND（2カラム・投資寄せ） ─────────── */}
+  <section class="py-16 md:py-20" style="background-color: var(--color-bg-section);">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        {/* POPULAR */}
+        <div class="lg:col-span-5">
+          <p class="meta text-xs mb-2">— Popular</p>
+          <h2 class="text-2xl md:text-3xl mb-8" style="font-family: var(--font-jp-serif); font-weight: 700;">よく読まれている</h2>
+          <ol class="space-y-6">
+            {popular.map((p, i) => (
+              <li>
+                <a href={`/posts/${p.id}`} class="group flex gap-5 items-baseline">
+                  <span class="text-3xl shrink-0 w-10 leading-none" style="font-family: var(--font-display); color: var(--color-fg-muted);">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <div>
+                    <div class="flex items-center gap-2 mb-1 flex-wrap">
+                      <LevelBadge level={p.data.level} size="sm" />
+                      <p class="meta text-[10px]">{categoryLabel(p.data.category)}</p>
+                    </div>
+                    <p class="text-sm md:text-base leading-snug group-hover:underline underline-offset-4" style="font-family: var(--font-jp-sans); font-weight: 500;">
+                      {p.data.title}
+                    </p>
                   </div>
-                  <p class="text-sm md:text-base leading-snug group-hover:underline underline-offset-4" style="font-family: var(--font-jp-sans); font-weight: 500;">
-                    {p.data.title}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        {/* RECOMMEND */}
+        <div class="lg:col-span-7">
+          <p class="meta text-xs mb-2">— Editor's Pick</p>
+          <h2 class="text-2xl md:text-3xl mb-8" style="font-family: var(--font-jp-serif); font-weight: 700;">編集部おすすめ</h2>
+          <div class="space-y-8">
+            {recommend.map((r) => (
+              <a href={`/posts/${r.id}`} class="group grid grid-cols-3 gap-5 items-start">
+                {r.data.heroImage ? (
+                  <img
+                    src={r.data.heroImage}
+                    alt={r.data.title}
+                    width="1672"
+                    height="941"
+                    loading="lazy"
+                    decoding="async"
+                    class="col-span-1 aspect-[4/3] w-full object-cover"
+                  />
+                ) : (
+                  <div class={`col-span-1 aspect-[4/3] bg-gradient-to-br ${r.data.accent ?? fallbackAccent}`}></div>
+                )}
+                <div class="col-span-2">
+                  <div class="flex items-center gap-2 mb-2 flex-wrap">
+                    <LevelBadge level={r.data.level} size="sm" />
+                    <p class="meta text-[10px]">{categoryLabel(r.data.category)}</p>
+                  </div>
+                  <h3 class="text-base md:text-lg leading-snug mb-2 group-hover:underline underline-offset-4" style="font-family: var(--font-jp-serif); font-weight: 700;">
+                    {r.data.title}
+                  </h3>
+                  <p class="text-xs md:text-sm leading-relaxed" style="color: var(--color-fg-muted); font-family: var(--font-jp-sans);">
+                    {r.data.description}
                   </p>
                 </div>
               </a>
-            </li>
-          ))}
-        </ol>
-      </div>
-
-      {/* RECOMMEND */}
-      <div class="lg:col-span-7">
-        <p class="meta text-xs mb-2">— Editor's Pick</p>
-        <h2 class="text-2xl md:text-3xl mb-8" style="font-family: var(--font-jp-serif); font-weight: 700;">編集部おすすめ</h2>
-        <div class="space-y-8">
-          {recommend.map((r) => (
-            <a href={`/posts/${r.id}`} class="group grid grid-cols-3 gap-5 items-start">
-              {r.data.heroImage ? (
-                <img
-                  src={r.data.heroImage}
-                  alt={r.data.title}
-                  width="1672"
-                  height="941"
-                  loading="lazy"
-                  decoding="async"
-                  class="col-span-1 aspect-[4/3] w-full object-cover"
-                />
-              ) : (
-                <div class={`col-span-1 aspect-[4/3] bg-gradient-to-br ${r.data.accent ?? fallbackAccent}`}></div>
-              )}
-              <div class="col-span-2">
-                <div class="flex items-center gap-2 mb-2 flex-wrap">
-                  <LevelBadge level={r.data.level} size="sm" />
-                  <p class="meta text-[10px]">{categoryLabel(r.data.category)}</p>
-                </div>
-                <h3 class="text-base md:text-lg leading-snug mb-2 group-hover:underline underline-offset-4" style="font-family: var(--font-jp-serif); font-weight: 700;">
-                  {r.data.title}
-                </h3>
-                <p class="text-xs md:text-sm leading-relaxed" style="color: var(--color-fg-muted); font-family: var(--font-jp-sans);">
-                  {r.data.description}
-                </p>
-              </div>
-            </a>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  {/* ─────────── CATEGORY: AI ─────────── */}
+  {/* ─────────── 用語集への導線（投資用語＝SEO入口・強化して残す） ─────────── */}
+  <section class="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-20 border-t" style="border-color: rgba(10,10,10,0.08);">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+      <div class="md:col-span-8">
+        <p class="meta text-xs mb-2">— Glossary</p>
+        <h2 class="text-2xl md:text-3xl mb-3" style="font-family: var(--font-jp-serif); font-weight: 700;">お金のことばを、まず1つずつ</h2>
+        <p class="text-sm md:text-base leading-relaxed" style="color: var(--color-fg-muted); font-family: var(--font-jp-sans);">
+          新NISA・iDeCo・複利・ドルコスト平均法……。むずかしそうな言葉を、1語ずつ短く。読みながら分からない言葉が出てきたら、ここへ。
+        </p>
+      </div>
+      <div class="md:col-span-4 md:text-right">
+        <a
+          href="/glossary"
+          class="inline-flex items-center px-6 py-3 text-sm border hover:bg-black/5 transition-colors"
+          style="border-color: var(--color-fg); color: var(--color-fg); font-family: var(--font-jp-sans);"
+        >
+          用語集を見る →
+        </a>
+      </div>
+    </div>
+  </section>
+
+  {/* ─────────── その他の読み物（AI 2番手＋IT 凍結を統合・小さく） ─────────── */}
   <section class="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-20 border-t" style="border-color: rgba(10,10,10,0.08);">
     <div class="flex items-end justify-between mb-10">
       <div>
-        <p class="meta text-xs mb-2">— Category 01</p>
-        <h2 class="text-2xl md:text-3xl" style="font-family: var(--font-jp-serif); font-weight: 700;">{CATEGORIES.ai.fullLabel}</h2>
+        <p class="meta text-xs mb-2">— Also</p>
+        <h2 class="text-2xl md:text-3xl" style="font-family: var(--font-jp-serif); font-weight: 700;">その他の読み物（AI・IT）</h2>
       </div>
       <a href="/category/ai" class="text-xs hover:underline underline-offset-4" style="font-family: var(--font-mono); letter-spacing: 0.05em;">
         VIEW ALL →
       </a>
     </div>
     <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
-      {categoryAI.map((p) => (
+      {otherReads.map((p) => (
         <li>
           <a href={`/posts/${p.id}`} class="group block py-3 border-b" style="border-color: rgba(10,10,10,0.08);">
             <div class="flex items-center gap-2 mb-2 flex-wrap">
               <LevelBadge level={p.data.level} size="sm" />
-              <p class="meta text-[10px]">{formatDate(p.data.publishedAt)}</p>
+              <p class="meta text-[10px]">{categoryLabel(p.data.category)} · {formatDate(p.data.publishedAt)}</p>
             </div>
             <h3 class="text-base leading-snug group-hover:underline underline-offset-4" style="font-family: var(--font-jp-serif); font-weight: 700;">
               {p.data.title}
@@ -279,75 +271,17 @@ const fallbackAccent = 'from-zinc-200 to-zinc-400';
     </ul>
   </section>
 
-  {/* ─────────── CATEGORY: 投資 ─────────── */}
-  <section class="py-16 md:py-20" style="background-color: var(--color-bg-section);">
-    <div class="max-w-7xl mx-auto px-6 md:px-12">
-      <div class="flex items-end justify-between mb-10">
-        <div>
-          <p class="meta text-xs mb-2">— Category 02</p>
-          <h2 class="text-2xl md:text-3xl" style="font-family: var(--font-jp-serif); font-weight: 700;">{CATEGORIES.invest.fullLabel}</h2>
-        </div>
-        <a href="/category/invest" class="text-xs hover:underline underline-offset-4" style="font-family: var(--font-mono); letter-spacing: 0.05em;">
-          VIEW ALL →
-        </a>
-      </div>
-      <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
-        {categoryInvest.map((p) => (
-          <li>
-            <a href={`/posts/${p.id}`} class="group block py-3 border-b" style="border-color: rgba(10,10,10,0.08);">
-              <div class="flex items-center gap-2 mb-2 flex-wrap">
-              <LevelBadge level={p.data.level} size="sm" />
-              <p class="meta text-[10px]">{formatDate(p.data.publishedAt)}</p>
-            </div>
-              <h3 class="text-base leading-snug group-hover:underline underline-offset-4" style="font-family: var(--font-jp-serif); font-weight: 700;">
-                {p.data.title}
-              </h3>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
-  </section>
-
-  {/* ─────────── CATEGORY: IT ─────────── */}
-  <section class="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-20 border-t" style="border-color: rgba(10,10,10,0.08);">
-    <div class="flex items-end justify-between mb-10">
-      <div>
-        <p class="meta text-xs mb-2">— Category 03</p>
-        <h2 class="text-2xl md:text-3xl" style="font-family: var(--font-jp-serif); font-weight: 700;">{CATEGORIES.it.fullLabel}</h2>
-      </div>
-      <a href="/category/it" class="text-xs hover:underline underline-offset-4" style="font-family: var(--font-mono); letter-spacing: 0.05em;">
-        VIEW ALL →
-      </a>
-    </div>
-    <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-6">
-      {categoryIT.map((p) => (
-        <li>
-          <a href={`/posts/${p.id}`} class="group block py-3 border-b" style="border-color: rgba(10,10,10,0.08);">
-            <div class="flex items-center gap-2 mb-2 flex-wrap">
-              <LevelBadge level={p.data.level} size="sm" />
-              <p class="meta text-[10px]">{formatDate(p.data.publishedAt)}</p>
-            </div>
-            <h3 class="text-base leading-snug group-hover:underline underline-offset-4" style="font-family: var(--font-jp-serif); font-weight: 700;">
-              {p.data.title}
-            </h3>
-          </a>
-        </li>
-      ))}
-    </ul>
-  </section>
-
-  {/* ─────────── STARTER KIT CTA（黒背景フルブリード） ─────────── */}
+  {/* ─────────── STARTER KIT CTA（投資版・黒背景フルブリード） ─────────── */}
   <section style="background-color: var(--color-bg-dark); color: var(--color-fg-inverse);">
     <div class="max-w-7xl mx-auto px-6 md:px-12 py-20 md:py-28">
       <div class="grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
         <div class="md:col-span-7">
           <p class="text-xs mb-5 opacity-60" style="font-family: var(--font-mono); letter-spacing: 0.1em;">— STARTER KIT</p>
           <h2 class="text-3xl md:text-5xl leading-tight mb-6" style="font-family: var(--font-jp-serif); font-weight: 700;">
-            最低限の<br/>スターターキット
+            お金の<br/>最低限スターターキット
           </h2>
           <p class="text-sm md:text-base leading-relaxed opacity-80 max-w-xl" style="font-family: var(--font-jp-sans);">
-            AI、投資、ITの「これだけは外せない」を、非エンジニア視点で一冊にまとめた読み物。<br/>
+            新NISA・iDeCo・保険・住宅・老後の「これだけは外せない」を、専門家じゃない人の視点で一冊に。<br/>
             テンプレ集ではなく、削った先に残ったものだけ。
           </p>
         </div>
@@ -364,7 +298,7 @@ const fallbackAccent = 'from-zinc-200 to-zinc-400';
     </div>
   </section>
 
-  {/* ─────────── INDEX（ディレクトリ） ─────────── */}
+  {/* ─────────── INDEX（ディレクトリ・投資先頭） ─────────── */}
   <section class="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-20">
     <div class="mb-10">
       <p class="meta text-xs mb-2">— Index</p>

@@ -1,0 +1,50 @@
+---
+// smart-side トップ 診断ツール帯（2026-07-01リデザイン・集客1番の間口）
+// Hero直下フル帯。健診アプリ（資産形成 健康診断）への大導線。
+// CheckupCta の信頼メッセージを簡潔版で添える（端末内・登録不要・中立）。
+// id="tools" … ヘッダーナビ「診断ツール」からアンカーで飛べる。
+// 4条件①匿名遵守：実名・所属を出さない
+
+const CHECKUP_URL =
+  'https://smartside-jp.github.io/asset-planning-checkup/?utm_source=smartside&utm_medium=home_band&utm_campaign=checkup&utm_content=home_band';
+const checkupOnclick =
+  "if(window.gtag){gtag('event','cta_checkup_click',{source:'home_band'});}";
+---
+
+<section id="tools" style="background-color: var(--color-accent); color: #ffffff; scroll-margin-top: 80px;">
+  <div class="max-w-7xl mx-auto px-6 md:px-12 py-14 md:py-20">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 items-center">
+      {/* 左：コピー */}
+      <div class="md:col-span-7">
+        <p class="text-xs mb-4" style="font-family: var(--font-mono); letter-spacing: 0.1em; opacity: 0.7;">— FREE TOOL</p>
+        <h2 class="text-2xl md:text-4xl leading-snug mb-4" style="font-family: var(--font-jp-serif); font-weight: 700;">
+          まず、自分の数字で<br class="sm:hidden"/>見てみる
+        </h2>
+        <p class="text-sm md:text-base leading-relaxed mb-5" style="font-family: var(--font-jp-sans); opacity: 0.9;">
+          <strong>資産形成 健康診断</strong>は、保険・NISA・住宅・老後を一気に見て、見直しの余地を信号で出してくれる無料ツール。読み流すより、いちど自分の数字で見てみると早いです。
+        </p>
+        {/* 信頼メッセージ（簡潔版・「データに使われそう／何か売られそう」への事実応答） */}
+        <ul class="flex flex-wrap gap-x-5 gap-y-1.5 text-xs md:text-sm" style="font-family: var(--font-jp-sans); opacity: 0.85;">
+          <li>🔒 入力は<strong>端末の中だけ</strong>・サーバー送信なし</li>
+          <li>✍️ <strong>登録もメール登録も不要</strong></li>
+          <li>⚖️ 商品の<strong>販売・紹介なし</strong>（中立）</li>
+        </ul>
+      </div>
+
+      {/* 右：CTA */}
+      <div class="md:col-span-5 md:text-right">
+        <a
+          href={CHECKUP_URL}
+          target="_blank"
+          rel="noopener"
+          onclick={checkupOnclick}
+          class="inline-flex items-center px-7 py-4 text-sm md:text-base font-bold rounded-md transition-opacity hover:opacity-85"
+          style="background-color: #ffffff; color: var(--color-accent); font-family: var(--font-jp-sans);"
+        >
+          資産形成 健康診断をやってみる →
+        </a>
+        <p class="text-xs mt-3" style="opacity: 0.7;">無料・登録不要／所要 5〜10 分</p>
+      </div>
+    </div>
+  </div>
+</section>

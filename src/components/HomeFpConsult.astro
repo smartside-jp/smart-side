@@ -1,0 +1,70 @@
+---
+// smart-side トップ FP相談セクション（2026-07-01リデザイン・前面化）
+// ポジション＝「商材を売りつけないFP」。診断帯（間口）の直後に格上げ配置。
+// 健診アプリ＝間口／FP相談＝その先、の2段構え。
+// ── ガードレール⑥（誇大回避 × 匿名との両立）──
+//   ・資格の数字は出さない（FP2級は未取得＝取得後にバッジ追加の拡張余地）
+//   ・実績は控えめ・正確に（相談件数などの数字は盛らない）
+//   ・投資助言に踏み込まない（個別銘柄の売買推奨はしない＝既存YMYL線と整合）
+//   ・匿名ハードルは「売りつけない＝リスクゼロ」＋「無料ツールで先に信頼」で緩和
+// 4条件①匿名遵守：実名・所属・地域を出さない
+
+// 根拠3枚（「結局なにか売られるんでしょ」という警戒に事実で応える）
+const reasons = [
+  {
+    icon: '🚫',
+    title: '何も売りません',
+    body: '金融商品も保険も、販売・紹介は一切なし。',
+  },
+  {
+    icon: '⚖️',
+    title: 'だから中立でいられる',
+    body: '売り手の都合が混じらない。証券でも保険でも、あなたに必要かどうかだけで話せます。',
+  },
+  {
+    icon: '👤',
+    title: '実際に相談を受けています',
+    body: 'まずは身近な範囲から、匿名で。何かを売りつけられる心配がないから、気軽にどうぞ。',
+  },
+];
+---
+
+<section class="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-20 border-t" style="border-color: rgba(10,10,10,0.08);">
+  <div class="max-w-3xl mb-10">
+    <p class="meta text-xs mb-2">— お金の相談</p>
+    <h2 class="text-2xl md:text-3xl mb-4" style="font-family: var(--font-jp-serif); font-weight: 700;">
+      その先は、商材を売らないFPに相談
+    </h2>
+    <p class="text-sm md:text-base leading-relaxed" style="color: var(--color-fg-muted); font-family: var(--font-jp-sans);">
+      無料ツールで気になったこと、もっと個別に相談したい——そんなときは。金融商品も保険も<strong style="color: var(--color-accent);">「売らない」立場</strong>で、身近な人のお金の相談に乗ってきました。何かを売りつけられる心配がないから、あなたの都合だけで話せます。<strong style="color: var(--color-accent);">匿名のまま</strong>でどうぞ。
+    </p>
+  </div>
+
+  {/* 根拠3枚 */}
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 mb-10">
+    {reasons.map((r) => (
+      <div class="border p-5 md:p-6" style="border-color: rgba(10,10,10,0.12); background-color: var(--color-bg-section);">
+        <p class="text-2xl mb-3" aria-hidden="true">{r.icon}</p>
+        <h3 class="text-base md:text-lg mb-2" style="font-family: var(--font-jp-serif); font-weight: 700;">
+          {r.title}
+        </h3>
+        <p class="text-xs md:text-sm leading-relaxed" style="color: var(--color-fg-muted); font-family: var(--font-jp-sans);">
+          {r.body}
+        </p>
+      </div>
+    ))}
+  </div>
+
+  <div class="flex flex-wrap items-center gap-4">
+    <a
+      href="/about"
+      class="inline-flex items-center px-7 py-3 text-sm md:text-base font-bold transition-opacity hover:opacity-85"
+      style="background-color: var(--color-accent); color: #ffffff; font-family: var(--font-jp-sans);"
+    >
+      お金の相談をしてみる（匿名）→
+    </a>
+    <p class="text-xs md:text-sm" style="color: var(--color-fg-muted); font-family: var(--font-jp-sans);">
+      まずは <a href="#tools" class="underline underline-offset-2" style="color: var(--color-accent);">無料の健康診断</a> から試すのもおすすめです。
+    </p>
+  </div>
+</section>

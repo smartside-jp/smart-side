@@ -21,7 +21,7 @@ export const CATEGORIES: Record<CategorySlug, CategoryMeta> = {
     slug: 'invest',
     label: '投資',
     fullLabel: '投資 / お金',
-    description: '新NISA / iDeCo / インデックス。世のテンプレを試して残ったものだけ。',
+    description: '新NISA・iDeCo・インデックス・老後のお金。商材を売らない中立の立場で、世のテンプレを試して残ったものだけ。',
   },
   it: {
     slug: 'it',

@@ -4,12 +4,13 @@
 // 中：ナビ（AI / 投資 / IT / Starter Kit / About）
 // 右：検索アイコン
 
+// 2026-07-01 投資集中リデザイン：投資を先頭に・診断ツール新設・AI/ITは1項目に統合（下層へ降格）
 const navItems = [
-  { href: '/category/ai', label: 'AI' },
   { href: '/category/invest', label: '投資' },
-  { href: '/category/it', label: 'IT' },
-  { href: '/starter-kit', label: 'Starter Kit' },
   { href: '/glossary', label: '用語集' },
+  { href: '/#tools', label: '診断ツール' },
+  { href: '/starter-kit', label: 'スターターキット' },
+  { href: '/category/ai', label: 'AI・IT' },
   { href: '/about', label: 'お問い合わせ' },
 ];
 ---
@@ -52,17 +53,110 @@ const navItems = [
       </svg>
     </button>
 
-    <!-- モバイル用ナビトグル -->
+    <!-- モバイル用ナビトグル（ハンバーガー ⇄ ×） -->
     <button
       type="button"
+      id="mobile-nav-toggle"
       aria-label="メニューを開く"
+      aria-controls="mobile-nav"
+      aria-expanded="false"
       class="md:hidden w-9 h-9 flex items-center justify-center"
     >
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <!-- ハンバーガー（閉じている時に表示） -->
+      <svg class="icon-open" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <line x1="4" y1="6" x2="20" y2="6"></line>
         <line x1="4" y1="12" x2="20" y2="12"></line>
         <line x1="4" y1="18" x2="20" y2="18"></line>
       </svg>
+      <!-- ×（開いている時に表示） -->
+      <svg class="icon-close" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+      </svg>
     </button>
   </div>
+
+  <!-- モバイル用ナビメニュー（ハンバーガー押下で開閉・md 以上では常に非表示） -->
+  <nav
+    id="mobile-nav"
+    aria-label="モバイルナビゲーション"
+    class="md:hidden border-t"
+    style="border-color: rgba(10, 10, 10, 0.08);"
+  >
+    <ul class="max-w-7xl mx-auto px-6 py-2">
+      {navItems.map((item) => (
+        <li>
+          <a
+            href={item.href}
+            class="block py-3.5 text-base border-b last:border-b-0"
+            style="color: var(--color-fg); border-color: rgba(10, 10, 10, 0.06);"
+          >
+            {item.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
 </header>
+
+<style>
+  /* モバイルメニュー：閉じ＝非表示、is-open で表示 */
+  #mobile-nav {
+    display: none;
+  }
+  #mobile-nav.is-open {
+    display: block;
+  }
+  /* md（768px）以上では、開閉状態に関わらず常に非表示（リサイズで開いたまま残らないように） */
+  @media (min-width: 768px) {
+    #mobile-nav {
+      display: none !important;
+    }
+  }
+
+  /* アイコン切替：開いている時は × を、閉じている時はハンバーガーを表示 */
+  #mobile-nav-toggle .icon-close {
+    display: none;
+  }
+  #mobile-nav-toggle[aria-expanded="true"] .icon-open {
+    display: none;
+  }
+  #mobile-nav-toggle[aria-expanded="true"] .icon-close {
+    display: block;
+  }
+</style>
+
+<script>
+  // モバイルナビの開閉トグル
+  const toggle = document.getElementById('mobile-nav-toggle');
+  const nav = document.getElementById('mobile-nav');
+
+  if (toggle && nav) {
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'メニューを閉じる' : 'メニューを開く');
+      nav.classList.toggle('is-open', open);
+    };
+
+    // ハンバーガー押下でトグル
+    toggle.addEventListener('click', () => {
+      const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      setOpen(!isOpen);
+    });
+
+    // メニュー内リンクを踏んだら閉じる（同一ページ内アンカーでも自然に閉じる）
+    nav.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a')) {
+        setOpen(false);
+      }
+    });
+
+    // Esc で閉じてボタンにフォーカスを戻す
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+  }
+</script>
