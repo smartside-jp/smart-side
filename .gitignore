@@ -26,6 +26,8 @@ pnpm-debug.log*
 # 社内メモ・記事ネタ（公開リポジトリに含めない）
 article_ideas.md
 *.bak
+# 内部の計画・設計ドキュメント（誤commit防止）
+plan_*.html
 
 # Claude Code workspace（公開リポジトリに含めない）
 .claude/
